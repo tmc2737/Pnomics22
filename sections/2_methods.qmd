@@ -1,0 +1,53 @@
+## Methods
+
+::: {.notes}
+These are optional notes.
+:::
+
+## Participants
+
+:::: {.columns}
+
+::: {.column width="50%"}
+|  CONDITION        | _N_ | _M_ (age)    | _SE_ (age) |
+|:------------------|:---:|:------------:|:----------:|
+| Related Cues      | 49  | 20.24        | 0.57       |
+| Unrelated Cues    | 36  | 19.73        | 0.25       |
+:::
+
+::: {.column width="50%"}
+- Sample consisted of 85 college-aged students recruited from Georgia Tech's research subject pool.
+- Random (blind) assignment to 1 of 2 between-subjects conditions:
+  + _Related Cues_
+  + _Unrelated Cues_
+:::
+:::: 
+
+::: {.notes}
+These are optional notes.
+:::
+
+## Procedure
+
+:::: {.columns}
+
+::: {.column width="30%"}
+The experimental procedure followed in 3 parts:
+
+  1. such and such
+  2. such and such
+  3. such and such
+:::
+
+::: {.column width="70%"}
+![](./img/procedure.png){fig-align="center"}
+:::
+:::: 
+
+::: {.notes}
+These are optional notes.
+:::
+
+## Quick Results
+
+![](./img/recall_trial.png)

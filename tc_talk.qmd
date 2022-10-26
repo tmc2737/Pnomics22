@@ -2,16 +2,50 @@
 title: Exploring the Mechanisms of Output Interference During Cued Recall Using Metamemory Judgments
 author: |
     Taylor Curley, PhD \
-    Georgia Institute of Technology \
+    Air Force Research Laboratory \
     \
     tmc2737@gmail.com
 ---
 
-## Disclaimers
+<!-- Begin slides -->
 
-- The opinions expressed herein are solely those of the author and do not necessarily represent the opinions of the United States Government, the U.S. Department of Defense, the U.S. Air Force, or any of their subsidiaries, or employees.
-- These materials were developed in conjunction with the AFRL. Some parts of this presentation have not been approved for public release and should not be shared outside of this organization.
+## Acknowledgements
+
+:::: {.columns}
+::: {.column width="50%"}
+
+- I would like to thank several people, including:
+  - Chris Hertzog (Georgia Tech)
+  - Emily Lustig (Georgia Tech)
+  - MacKenzie Hughes (Georgia Tech)
+  - Rick Thomas (Georgia Tech)
+  - John Dunlosky (Kent State)
+  - Paul Verhaeghen (Georgia Tech)
+  - Dobromir Rahnev (Georgia Tech)
+  - Megan B. Morris (AFRL)
+  - Leslie Blaha (AFRL)
+
+:::
+
+::: {.column width="50%"}
+- Technical notes:
+  - This project was part of a dissertation project at the Georgia Institute of Technology and funded in part by a Ruth L. Kirschstein National Research Service Award (NRSA) Institutional Research Training Grant (T32) from the National Institutes of Health (National Institute on Aging) Grant 5T32AG000175.
+  - All code and figures were run using Julia and R, and this presentation was compiled using [Quarto](https://quarto.org).
+  - Most analyses can be found on OSF: [osf.io/2eqv7](https://osf.io/2eqv7/).
+:::
+:::: 
 
 ::: {.notes}
 These are optional notes.
 :::
+
+<!-- Insert sections -->
+
+{{< include sections/1_intro.qmd >}}
+{{< include sections/2_methods.qmd >}}
+
+<!-- End main slides - add blank -->
+
+## 
+
+<!-- Full stop -->

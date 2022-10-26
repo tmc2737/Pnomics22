@@ -1,1 +1,9 @@
 /.quarto/
+
+# Ignore participant data files
+
+/*.csv
+
+# Ignore old analysis files
+
+/analysis/old
