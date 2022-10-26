@@ -1,0 +1,7 @@
+project:
+  render:
+    - tc_talk.qmd
+
+format: 
+    pptx:
+      reference-doc: ./etc/template.pptx

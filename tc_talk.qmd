@@ -1,0 +1,17 @@
+---
+title: Exploring the Mechanisms of Output Interference During Cued Recall Using Metamemory Judgments
+author: |
+    Taylor Curley, PhD \
+    Georgia Institute of Technology \
+    \
+    tmc2737@gmail.com
+---
+
+## Disclaimers
+
+- The opinions expressed herein are solely those of the author and do not necessarily represent the opinions of the United States Government, the U.S. Department of Defense, the U.S. Air Force, or any of their subsidiaries, or employees.
+- These materials were developed in conjunction with the AFRL. Some parts of this presentation have not been approved for public release and should not be shared outside of this organization.
+
+::: {.notes}
+These are optional notes.
+:::
