@@ -143,3 +143,10 @@ if (save_fig){
   ggsave(paste0(fig_path,"recall_ranef.png"), height = 6, width = 4, 
          units = "in", dpi = 600)
 }
+
+################################################################################
+## SECTION X: PART-SET CORRELATIONS
+################################################################################
+
+# Call external script
+source("./_partset_corr.R")
