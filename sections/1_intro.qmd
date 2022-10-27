@@ -2,6 +2,8 @@
 
 ## Memory Interference
 
+![](./img/criss_figs.png)
+
 ## Memory Awareness
 
 ## Current Study

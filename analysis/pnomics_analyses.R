@@ -1,12 +1,12 @@
 ################################################################################
-## PNOMICS 2022 ANALYSES
+## PNOMICS 2022 ANALYSES - MAIN DOCUMENT
 ################################################################################
 ## Author       : Taylor Curley
 ## Email        : tmc2737 "at" gmail.com
 ## Date         : 10/26/22
 ################################################################################
-## Notes        :
-##              :
+## Notes        : Any supporting R scripts have an underscore (_) prepended to
+##              : the title.
 ##              :
 ##              :
 ################################################################################
@@ -24,6 +24,7 @@ require(jtools)
 require(tidyr)
 require(reshape2)
 require(Hmisc)
+require(interactions)
 
 # Save figures? If TRUE, then figures will write to the figure path
 save_fig <- FALSE
@@ -34,57 +35,14 @@ gt_palette <- c("#0286ce","#eaaa00", "#AD4025","#545454")
 # Default figure path
 fig_path <- "../img/"
 
-# Data summary function
-data_summary <- function(data, varname, groupnames){
-  require(plyr)
-  summary_func <- function(x, col){
-    c(mean = mean(x[[col]], na.rm=TRUE),
-      sd = sd(x[[col]], na.rm=TRUE),
-      se = sd(x[[col]], na.rm=TRUE)/sqrt(length(x[[col]])))
-  }
-  data_sum<-ddply(data, groupnames, .fun=summary_func,
-                  varname)
-  data_sum <- rename(data_sum, c("mean" = varname))
-  return(data_sum)
-}
+# Import custom functions
+source("./_helper_functions.R")
 
 # Data import + clean
-source("./_script_clean.R")
+source("./_import_dat.R")
 
 # Compute overall gammas
-gamma_dat <- data.frame(Participant = numeric(),
-                        Condition = character(),
-                        FOK_Gamma = numeric(),
-                        FOK_Gamma_Unrecall = numeric(),
-                        CJ_Gamma = numeric(),
-                        CJ_Gamma_Unrecall = numeric(),
-                        FOK_Recall_Gamma = numeric(),
-                        FOK_CJ_Gamma = numeric()
-)
-
-for (sub in unique(oi_dat$Participant)){
-  sub_dat <- subset(oi_dat, Participant == sub)
-  sub_dat_un <- subset(sub_dat, Recall_ACC == 0)
-  fok.gamma <- rcorr.cens(sub_dat$FOK_RESP, sub_dat$Recog_ACC, outx = T)[2]
-  fok.gamma.un <- rcorr.cens(sub_dat_un$FOK_RESP, sub_dat_un$Recog_ACC, outx = T)[2]
-  cj.gamma <- rcorr.cens(sub_dat$RCJ_RESP, sub_dat$Recog_ACC, outx = T)[2]
-  cj.gamma.un <- rcorr.cens(sub_dat_un$RCJ_RESP, sub_dat_un$Recog_ACC, outx = T)[2]
-  fok.recall.gamma <- rcorr.cens(sub_dat$Recall_ACC, sub_dat$FOK_RESP, outx = T)[2]
-  fok.cj.gamma <- rcorr.cens(sub_dat$FOK_RESP, sub_dat$RCJ_RESP)[2]
-  
-  gamma_dat <- rbind(gamma_dat, 
-                     data.frame(Participant = sub, 
-                                Condition = as.character(sub_dat$Condition[1]), 
-                                FOK_Gamma = as.numeric(fok.gamma),
-                                FOK_Gamma_Unrecall = as.numeric(fok.gamma.un), 
-                                CJ_Gamma = as.numeric(cj.gamma), 
-                                CJ_Gamma_Unrecall = as.numeric(cj.gamma.un),
-                                FOK_Recall_Gamma = as.numeric(fok.recall.gamma),
-                                FOK_CJ_Gamma = as.numeric(fok.cj.gamma)
-                     )
-  )
-}
-gamma_dat$Condition <- as.factor(gamma_dat$Condition)
+source("./_overall_gamma.R")
 
 ################################################################################
 ## SECTION 1: CUED RECALL ACC
@@ -117,8 +75,8 @@ ggplot(recall_means2, aes(x=Condition, y=Recall_ACC, fill=Condition)) +
 
 ## Save figure
 if (save_fig){
-  ggsave(paste0(fig_path,"recall_cond.png"), height = 4, width = 3, units = "in",
-         dpi = 300)
+  ggsave(paste0(fig_path,"recall_cond.png"), height = 4, width = 3, 
+         units = "in", dpi = 600)
 }
 
 # MEANS BY TRIAL
@@ -130,7 +88,7 @@ for (p in unique(oi_dat$Participant)){
     scale(recall_means3$Recall_ACC[recall_means3$Participant == p], 
           center = T, scale = F)
 }
-recall_means4 <- data_summary(oi_dat, varname = "Recall_ACC", 
+recall_means4 <- data_summary(recall_means3, varname = "Recall_ACC", 
                               groupnames = c("Condition","CycleTrial"))
 recall_means4$CycleTrial <- recall_means4$CycleTrial+1
 recall_means5 <- data_summary(recall_means3, varname = "Recall_Cent", 
@@ -140,7 +98,7 @@ recall_means5 <- data_summary(recall_means3, varname = "Recall_Cent",
 ggplot(recall_means4, aes(x = CycleTrial, y = Recall_ACC, color = Condition)) +
   geom_point() +
   geom_errorbar(aes(ymin = Recall_ACC - se, ymax = Recall_ACC + se)) +
-  #geom_smooth(method = "loess", se = F, linetype = 2, alpha = 0.1) +
+  geom_smooth(method = "loess", se = F, linetype = 2, alpha = 0.1) +
   geom_smooth(method = "lm") +
   xlab("Trial (Within Recall Cycle)") +
   ylab("% Recalled") +
@@ -158,6 +116,30 @@ ggplot(recall_means4, aes(x = CycleTrial, y = Recall_ACC, color = Condition)) +
 
 ## Save figure
 if (save_fig){
-  ggsave(paste0(fig_path,"recall_trial.png"), height = 4, width = 4, units = "in",
-         dpi = 300)
+  ggsave(paste0(fig_path,"recall_trial.png"), height = 5, width = 4, 
+         units = "in", dpi = 600)
+}
+
+# MEANS BY TRIAL WITHIN RECALL BLOCK
+
+
+# MEANS BY TRIAL - LOGIT MLM - RANDOM INTERCEPTS
+
+## Intercept model
+recall.glmer.0 <- glmer(Recall_ACC ~ 1 + (1|Participant), 
+                        family = binomial(link="logit"), data = oi_dat)
+
+## Model with condition + trial across blocks
+recall.glmer.1 <- glmer(Recall_ACC ~ Condition*CycleTrial + (1|Participant),
+                         family = binomial(link="logit"), data = oi_dat)
+
+## Model with condition + trial within blocks
+recall.glmer.2 <- glmer(Recall_ACC ~ Condition*Cycle*CycleTrial + (1|Participant),
+                        family = binomial(link="logit"), data = oi_dat)
+
+## Plot random intercepts
+if (save_fig){
+  ggCaterpillar(ranef(recall.glmer.0), QQ=F)
+  ggsave(paste0(fig_path,"recall_ranef.png"), height = 6, width = 4, 
+         units = "in", dpi = 600)
 }
