@@ -43,9 +43,10 @@ These are optional notes.
 
 {{< include sections/1_intro.qmd >}}
 {{< include sections/2_methods.qmd >}}
+{{< include sections/3_results.qmd >}}
+{{< include sections/4_conclusions.qmd >}}
 
 <!-- End main slides - add blank -->
 
-## 
 
 <!-- Full stop -->

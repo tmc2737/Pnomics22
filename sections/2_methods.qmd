@@ -1,8 +1,4 @@
-## Methods
-
-::: {.notes}
-These are optional notes.
-:::
+# METHODS
 
 ## Participants
 
@@ -32,11 +28,18 @@ These are optional notes.
 :::: {.columns}
 
 ::: {.column width="30%"}
-The experimental procedure followed in 3 parts:
 
-  1. such and such
-  2. such and such
-  3. such and such
+* **Study**
+  + 40 cue-target word pairs X 2.
+  + Presented in random order.
+* **Cued Recall**
+  + Cued recall attempt + R/K/N + FOK (0-100)
+  + _Related Cues_: 4 blocks of 10 trials where cue words are from same category.
+  + _Unrelated Cues_: 40 trials in random order.
+* **Recognition**
+  + 4AFC attempt + RCJ (0-100)
+  + 40 trials in random order.
+
 :::
 
 ::: {.column width="70%"}
@@ -45,9 +48,6 @@ The experimental procedure followed in 3 parts:
 :::: 
 
 ::: {.notes}
-These are optional notes.
+- We presented the cue-target pairs twice (in 2 blocks) to bring recall accuracy off of floor.
 :::
 
-## Quick Results
-
-![](./img/recall_trial.png)

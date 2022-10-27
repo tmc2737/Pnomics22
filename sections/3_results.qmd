@@ -1,0 +1,17 @@
+# RESULTS
+
+## Cued Recall
+
+:::: {.columns}
+::: {.column width="50%"}
+
+- Both Related (_M_ = 0.36) and Unrelated Cues (_M_ = 38) conditions had similar overall levels of cued recall accuracy.
+  + _t_(74) = -0.34, _p_ = 0.73, _d_ = 0.09
+
+:::
+::: {.column width="50%"}
+
+![](./img/recall_cond)
+
+:::
+::::

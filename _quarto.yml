@@ -4,4 +4,9 @@ project:
 
 format: 
     pptx:
+      subject: Exploring the Mechanisms of Output Interference During Cued Recall Using Metamemory Judgments
+      description: Slides for Psychonomics - Metamemory I (232)
       reference-doc: ./etc/template.pptx
+      slide-level: 2
+      fig-format: png
+      fig-dpi: 500

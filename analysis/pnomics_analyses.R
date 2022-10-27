@@ -25,6 +25,7 @@ require(tidyr)
 require(reshape2)
 require(Hmisc)
 require(interactions)
+require(effectsize)
 
 # Save figures? If TRUE, then figures will write to the figure path
 save_fig <- FALSE
@@ -53,6 +54,10 @@ recall_means1 <- data_summary(oi_dat, varname = "Recall_ACC",
                               groupnames = c("Participant","Condition"))
 recall_means2 <- data_summary(recall_means1, varname = "Recall_ACC", 
                               groupnames = c("Condition"))
+
+# t-test + Cohen's d
+recall.t.1 <- t.test(Recall_ACC ~ Condition, data = recall_means1)
+recall.d.1 <- cohens_d(Recall_ACC ~ Condition, data = recall_means1)
 
 ## Plot the means
 ggplot(recall_means2, aes(x=Condition, y=Recall_ACC, fill=Condition)) + 
@@ -98,7 +103,7 @@ recall_means5 <- data_summary(recall_means3, varname = "Recall_Cent",
 ggplot(recall_means4, aes(x = CycleTrial, y = Recall_ACC, color = Condition)) +
   geom_point() +
   geom_errorbar(aes(ymin = Recall_ACC - se, ymax = Recall_ACC + se)) +
-  geom_smooth(method = "loess", se = F, linetype = 2, alpha = 0.1) +
+  #geom_smooth(method = "loess", se = F, linetype = 2, alpha = 0.1) +
   geom_smooth(method = "lm") +
   xlab("Trial (Within Recall Cycle)") +
   ylab("% Recalled") +

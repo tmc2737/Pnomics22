@@ -1,9 +1,33 @@
-## Overview
+# OVERVIEW
 
 ## Memory Interference
 
+::: {.notes}
+These are optional notes.
+:::
+
+## Output Interference
+
 ![](./img/criss_figs.png)
+
+::: {.notes}
+These are optional notes.
+:::
 
 ## Memory Awareness
 
+::: {.notes}
+These are optional notes.
+:::
+
+## Feelings-of-knowing
+
+::: {.notes}
+These are optional notes.
+:::
+
 ## Current Study
+
+::: {.notes}
+These are optional notes.
+:::
