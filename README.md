@@ -27,3 +27,9 @@ _Analysis files_:
   * `./analysis/_import_dat.R`
   * `./analysis/_overall_gamma.R`
   * `./img/*` - Default path for R images
+
+## External Calls
+
+These files are linked to the project's OSF repository:
+
+  * [osf.io/2eqv7](https://osf.io/2eqv7/)
