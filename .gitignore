@@ -2,7 +2,7 @@
 
 # Ignore participant data files
 
-/*.csv
+*.csv
 
 # Ignore old analysis files
 
