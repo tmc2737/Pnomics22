@@ -4,7 +4,7 @@ author: |
     Taylor Curley, PhD \
     Air Force Research Laboratory \
     \
-    tmc2737@gmail.com
+    taylor.curley@us.af.mil
 ---
 
 <!-- Begin slides -->

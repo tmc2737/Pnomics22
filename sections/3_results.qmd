@@ -1,17 +1,33 @@
 # RESULTS
 
-## Cued Recall
+## Memory Performance
 
 :::: {.columns}
 ::: {.column width="50%"}
 
-- Both Related (_M_ = 0.36) and Unrelated Cues (_M_ = 38) conditions had similar overall levels of cued recall accuracy.
-  + _t_(74) = -0.34, _p_ = 0.73, _d_ = 0.09
+- Both Related (_M_ = 0.36) and Unrelated Cues (_M_ = 0.38) conditions had similar overall levels of cued recall accuracy.
+  + _t_(74) = 0.34, _p_ = 0.73, _d_ = 0.09
+
+- Both Related (_M_ = 0.67) and Unrelated (_M_ = 0.65) Cues conditions also had similar 4AFC accuracy.
+  + _t_(74) = 0.48, _p_ = 0.64, _d_ = 0.11
 
 :::
 ::: {.column width="50%"}
 
-![](./img/recall_cond)
+![](./img/recall_recog_means.png)
 
 :::
 ::::
+
+::: {.notes}
+These are optional notes.
+:::
+
+## Output Interference
+
+![](./img/recall_lin_loess.png)
+
+
+::: {.notes}
+These are optional notes.
+:::
