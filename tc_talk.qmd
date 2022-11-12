@@ -48,5 +48,6 @@ These are optional notes.
 
 <!-- End main slides - add blank -->
 
+{{< include sections/5_appendix.qmd >}}
 
 <!-- Full stop -->

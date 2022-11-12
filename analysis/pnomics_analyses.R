@@ -6,7 +6,7 @@
 ## Date         : 10/26/22
 ################################################################################
 ## Notes        : Any supporting R scripts have an underscore (_) prepended to
-##              : the title.
+##              : the title. Check the README file for more information.
 ##              :
 ##              :
 ################################################################################
@@ -28,14 +28,12 @@ require(interactions)
 require(effectsize)
 require(patchwork)
 
-# Save figures? If TRUE, then figures will write to the figure path
-save_fig <- FALSE
+# Save figures? If TRUE, then figures will write to the figure path by calling
+# the "./_save_figs.R" script
+save_fig <- F
 
 # Set custom color palette
-gt_palette <- c("#0286ce","#eaaa00", "#AD4025","#545454")
-
-# Default figure path
-fig_path <- "../img/"
+gt_palette <- c("#0286ce","#eaaa00","#D6DBD4","#AD4025","#545454")
 
 # Import custom functions
 source("./_helper_functions.R")
@@ -80,12 +78,6 @@ recog.plot.1 <-
     geom_hline(yintercept = 0) +
     guides(fill = "none")
 
-## Save figure
-if (save_fig){
-  ggsave(filename = paste0(fig_path,"recog_cond.png"), plot = recog.plot.1, 
-         height = 4, width = 3.5, units = "in", dpi = 600)
-}
-
 ################################################################################
 ## CUED RECALL ACC
 ################################################################################
@@ -119,12 +111,6 @@ recall.plot.1 <-
     scale_fill_manual(values=gt_palette)+
     geom_hline(yintercept = 0) +
     guides(fill = "none")
-
-## Save figure
-if (save_fig){
-  ggsave(filename = paste0(fig_path,"recall_cond.png"), plot = recall.plot.1, 
-         height = 4, width = 3.5, units = "in", dpi = 600)
-}
 
 # MEANS BY TRIAL
 recall.means.3 <- data_summary(oi_dat, varname = "Recall_ACC", 
@@ -162,12 +148,6 @@ recall.plot.2 <-
     scale_color_manual(values=gt_palette) +
     scale_x_continuous(breaks = seq(1,10))
 
-## Save figure
-if (save_fig){
-  ggsave(filename = paste0(fig_path,"recall_trial.png"), plot = recall.plot.2,
-         height = 5, width = 4, units = "in", dpi = 600)
-}
-
 ## Plot the Loess regression
 recall.plot.3 <- 
   ggplot(recall.means.4, aes(x = CycleTrial, y = Recall_ACC, color = Condition)) +
@@ -185,12 +165,6 @@ recall.plot.3 <-
         strip.text.x = element_text(size = 11, face = "bold")) +
   scale_color_manual(values=gt_palette) +
   scale_x_continuous(breaks = seq(1,10))
-
-## Save figure
-if (save_fig){
-  ggsave(filename = paste0(fig_path,"recall_trial_loess.png"), plot = recall.plot.3,
-         height = 5, width = 4, units = "in", dpi = 600)
-}
 
 
 # MEANS BY TRIAL WITHIN RECALL BLOCK
@@ -210,12 +184,147 @@ recall.glmer.1 <- glmer(Recall_ACC ~ Condition*CycleTrial + (1|Participant),
 recall.glmer.2 <- glmer(Recall_ACC ~ Condition*Cycle*CycleTrial + (1|Participant),
                         family = binomial(link="logit"), data = oi_dat)
 
-## Plot random intercepts
-if (save_fig){
-  ggCaterpillar(ranef(recall.glmer.0), QQ=F)
-  ggsave(paste0(fig_path,"recall_ranef.png"), height = 6, width = 4, 
-         units = "in", dpi = 600)
-}
+################################################################################
+## FOK X RECOG GAMMAS
+################################################################################
+
+# All Items
+
+## Compute means
+
+fok.gamma.means.1 <- data_summary(gamma_dat, varname = "FOK_Gamma", 
+                                  groupnames = c("Condition"))
+colnames(fok.gamma.means.1) <- c("Condition","Gamma","sd","se")
+fok.gamma.means.1$Type <- "All Items"
+
+## t-tests + Cohen's d
+fok.gamma.t.1 <- t.test(FOK_Gamma ~ Condition, data = gamma_dat)
+fok.gamma.d.1 <- cohens_d(FOK_Gamma ~ Condition, data = gamma_dat)
+
+# Unrecalled items
+## Compute means
+fok.gamma.means.2 <- data_summary(gamma_dat, varname = "FOK_Gamma_Unrecall", 
+                                  groupnames = c("Condition"))
+colnames(fok.gamma.means.2) <- c("Condition","Gamma","sd","se")
+fok.gamma.means.2$Type <- "Unrecalled Items"
+
+# Means plots
+fok.gamma.means.3 <- rbind(fok.gamma.means.1,fok.gamma.means.2)
+fok.gamma.plot.1 <-
+  ggplot(fok.gamma.means.3, aes(x=Condition,y=Gamma,fill=Type)) +
+    geom_bar(stat = "identity", color="black", width=0.8) +
+    geom_errorbar(aes(ymin = Gamma - se, ymax = Gamma + se), width = 0.5) +
+    geom_hline(yintercept = 0.0, lty=3) +
+    facet_grid(.~Type) +
+    ylim(-0.25,0.5) +
+    scale_fill_manual(values=gt_palette) +
+    theme_base() +
+    theme(legend.position = "none",
+          strip.text.x = element_text(face = "bold"),
+          plot.background = element_blank())
+  
+################################################################################
+## CJ X RECOG GAMMAS
+################################################################################
+
+# All Items
+
+## Means
+cj.gamma.means.1 <- data_summary(gamma_dat, varname = "CJ_Gamma", groupnames = "Condition")
+colnames(cj.gamma.means.1) <- c("Condition","Gamma","sd","se")
+cj.gamma.means.1$Type <- "All Items"
+
+## t-tests + Cohen's D
+cj.gamma.t.1 <- t.test(CJ_Gamma ~ Condition, data = gamma_dat)
+cj.gamma.d.1 <- cohens_d(CJ_Gamma ~ Condition, data = gamma_dat)
+
+# Unrecalled Items
+
+## Means
+cj.gamma.means.2 <- data_summary(gamma_dat, varname = "CJ_Gamma_Unrecall", groupnames = "Condition")
+colnames(cj.gamma.means.2) <- c("Condition","Gamma","sd","se")
+cj.gamma.means.2$Type <- "Unrecalled Items"
+
+## t-tests + Cohen's D
+cj.gamma.t.2 <- t.test(CJ_Gamma_Unrecall ~ Condition, data = gamma_dat)
+cj.gamma.d.2 <- cohens_d(CJ_Gamma_Unrecall ~ Condition, data = gamma_dat)
+
+# Recalled Items
+
+## Means
+cj.gamma.means.3 <- data_summary(gamma_dat, varname = "CJ_Gamma_Recall", groupnames = "Condition")
+colnames(cj.gamma.means.3) <- c("Condition","Gamma","sd","se")
+cj.gamma.means.3$Type <- "Recalled Items"
+
+# Means plots
+cj.gamma.means.4 <- rbind(cj.gamma.means.1,cj.gamma.means.2,cj.gamma.means.3)
+cj.gamma.plot.1 <-
+  ggplot(cj.gamma.means.4, aes(x=Condition,y=Gamma,fill=Type)) +
+    geom_bar(stat = "identity", color="black", width=0.8) +
+    geom_errorbar(aes(ymin = Gamma - se, ymax = Gamma + se), width = 0.5) +
+    geom_hline(yintercept = 0.0, lty=3) +
+    facet_grid(.~Type) +
+    ylim(-0.2,1.0) +
+    scale_fill_manual(values=gt_palette) +
+    theme_base() +
+    theme(legend.position = "none",
+          strip.text.x = element_text(face = "bold"),
+          plot.background = element_blank())
+
+################################################################################
+## FOK X RECALL GAMMAS
+################################################################################
+
+## Means
+fok.gamma.means.4 <- data_summary(gamma_dat, varname = "FOK_Recall_Gamma", 
+                                  groupnames = "Condition")
+
+## t-test + Cohen's d
+fok.gamma.t.2 <- t.test(FOK_Recall_Gamma ~ Condition, data = gamma_dat)
+fok.gamma.d.2 <- cohens_d(FOK_Recall_Gamma ~ Condition, data = gamma_dat)
+
+################################################################################
+## FOK X CJ GAMMAS
+################################################################################
+
+# All items
+
+## Means
+fok.cj.means.1 <- data_summary(gamma_dat, varname = "FOK_CJ_Gamma",
+                               groupnames = "Condition")
+colnames(fok.cj.means.1) <- c("Condition","Gamma","sd","se")
+fok.cj.means.1$Type <- "All Items"
+
+# Unrecalled Items
+
+## Means
+fok.cj.means.2 <- data_summary(gamma_dat, varname = "FOK_CJ_Gamma_Unrecall",
+                               groupnames = "Condition")
+colnames(fok.cj.means.2) <- c("Condition","Gamma","sd","se")
+fok.cj.means.2$Type <- "Unrecalled Items"
+
+# Recalled Items
+
+## Means
+fok.cj.means.3 <- data_summary(gamma_dat, varname = "FOK_CJ_Gamma_Recall",
+                               groupnames = "Condition")
+colnames(fok.cj.means.3) <- c("Condition","Gamma","sd","se")
+fok.cj.means.3$Type <- "Recalled Items"
+
+# Means plots
+fok.cj.means.4 <- rbind(fok.cj.means.1,fok.cj.means.2,fok.cj.means.3)
+fok.cj.plot.1 <-
+  ggplot(fok.cj.means.4, aes(x=Condition,y=Gamma,fill=Type)) +
+    geom_bar(stat = "identity", color="black", width=0.8) +
+    geom_errorbar(aes(ymin = Gamma - se, ymax = Gamma + se), width = 0.5) +
+    geom_hline(yintercept = 0.0, lty=3) +
+    facet_grid(.~Type) +
+    ylim(-0.25,0.5) +
+    scale_fill_manual(values=gt_palette) +
+    theme_base() +
+    theme(legend.position = "none",
+          strip.text.x = element_text(face = "bold"),
+          plot.background = element_blank())
 
 ################################################################################
 ## PART-SET CORRELATIONS
@@ -224,55 +333,60 @@ if (save_fig){
 # Call external script
 source("./_partset_corr.R")
 
+# Within-bin gammas - All items
+
+## Means
+part.gamma.means.1 <- data_summary(within_set_gamma, varname = "FOK_Gamma", 
+                                   groupnames = c("CycleTrialBin","Condition"))
+colnames(part.gamma.means.1) <- c("CycleTrialBin","Condition","Gamma","sd","se")
+part.gamma.means.1$Type <- "All Items"
+
+# Within-bin gammas - Unrecalled items
+
+## Means
+part.gamma.means.2 <- data_summary(within_set_gamma, varname = "FOK_Gamma_Un",
+                                   groupnames = c("CycleTrialBin","Condition"))
+colnames(part.gamma.means.2) <- c("CycleTrialBin","Condition","Gamma","sd","se")
+part.gamma.means.2$Type <- "Unrecalled Items"
+
+## Figure
+part.gamma.means.3 <- rbind(part.gamma.means.1,part.gamma.means.2)
+part.gamma.figure.1 <-
+  ggplot(part.gamma.means.3, aes(x = CycleTrialBin, y = Gamma,group = Condition, color = Condition)) +
+    geom_line(stat = "identity") +
+    geom_point(stat = "identity") +
+    geom_errorbar(aes(ymin = Gamma - se, ymax = Gamma + se), width=0.25) +
+    geom_hline(yintercept = 0.0, lty=3) +
+    facet_grid(.~Type) +
+    xlab("Trial Bin (Within Block)") +
+    ylim(-0.25,0.75) +
+    scale_color_manual(values = gt_palette) +
+    theme_base() +
+    theme(plot.title = element_text(hjust=0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line.x = element_line(), 
+          axis.line.y = element_line(), 
+          legend.position = c(.8,.8), 
+          panel.background = element_rect(fill='white', color = "black"),
+          strip.text.x = element_text(size = 14, face = "bold"),
+          legend.title = element_text(size=12),
+          legend.text = element_text(size=10),
+          plot.background = element_blank())
+
+# Part-set gammas - All items
+
+## Means
+part.gamma.means.4 <- data_summary(part_set_gamma, varname = "FOK_Gamma",
+                                   groupnames = c("Comparison","Condition"))
+
+# Part-set gammas - Unrecalled items
+part.gamma.means.5 <- data_summary(part_set_gamma, varname = "FOK_Gamma_Un",
+                                   groupnames = c("Comparison","Condition"))
+
 ################################################################################
-## EXTRA STUFF
+## SAVE DATA
 ################################################################################
 
-# Combine recall + recog figures
-# Have shared x and y labels
-recall.plot.1.alt <-
-  recall.plot.1 +
-  xlab(" ")
-
-recog.plot.1.alt <-
-  recog.plot.1 + 
-  xlab(" ") +
-  theme(axis.title.y = element_blank(),
-        axis.text.y = element_blank())
-
-recall.recog.plot <-
-  (recall.plot.1.alt + recog.plot.1.alt) +
-  plot_annotation(subtitle = "Condition",
-                  theme = theme(plot.subtitle = element_text(hjust=0.525, vjust = -105,
-                                                              size = 12)))
-
-## Save figure
-if (save_fig){
-  ggsave(filename = paste0(fig_path,"recall_recog_means.png"), plot = recall.recog.plot)
-}
-
-# Combine linear and Loess recall figures
-recall.plot.2.alt <- 
-  recall.plot.2 + 
-  ggtitle("Linear") +
-  xlab(" ") +
-  theme(legend.position = "none")
-
-recall.plot.3.alt <-
-  recall.plot.3 +
-  ggtitle("Loess") +
-  xlab(" ") +
-  theme(axis.title.y = element_blank(),
-        axis.text.y = element_blank(),
-        legend.position = c(0.5,0.8))
-
-recall.lin.loess.plot <-
-  (recall.plot.2.alt + recall.plot.3.alt) +
-  plot_annotation(subtitle = "Trial (Within Block)",
-                  theme = theme(plot.subtitle = element_text(hjust=0.525, vjust = -138, size = 12)))
-
-## Save figure
-if (save_fig){
-  ggsave(filename = paste0(fig_path,"recall_lin_loess.png"), plot = recall.lin.loess.plot,
-         height = 5, width = 7, units = "in")
-}
+# Save figures
+if (save_fig) source("./_save_figs.R")

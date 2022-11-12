@@ -22,11 +22,19 @@ _Quarto files_:
 
 _Analysis files_:
 
-  * `./analysis/pnomics_analyses.R` - main file
+  * `./analysis/pnomics_analyses.R`
+    + Main analysis file.
   * `./analysis/_helper_functions.R`
+    + Declaration of custum functions to help with analyses.
   * `./analysis/_import_dat.R`
   * `./analysis/_overall_gamma.R`
-  * `./img/*` - Default path for R images
+    + Calculates canonical Goodman-Kruskal gamma correlations for different DVs and data subsets.
+  * `./analysis/_partset_cor.R`
+    + Calculates GK gammas using more unconventional methods.
+  * `./analysis/_save_figs.R`
+    + Explicit specifications for saving figures to my personal computer that are otherwise unhelpful.
+  * `./img/*`
+    + Default path for saved images.
 
 ## External Calls
 
