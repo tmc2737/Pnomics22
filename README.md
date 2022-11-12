@@ -14,11 +14,16 @@ _Main presentation_:
 
 _Quarto files_:
 
-  * `./tc_talk.qmd` - main file
-  * `./_quarto.yml` - necessary YAML declarations
+  * `./tc_talk.qmd`
+    + The main working file.
+  * `./_quarto.yml`
+    + Contains the necessary YAML declarations
   * `./sections/1_intro.qmd`
   * `./sections/2_methods.qmd`
-  * `./etc/*` - PPTX template + template images
+  * `./sections/3_results.qmd`
+  * `./sections/4_conclusions.qmd`
+  * `./etc/*`
+    + Contains the custom Powerpoint template.
 
 _Analysis files_:
 
