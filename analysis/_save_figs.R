@@ -42,6 +42,26 @@ ggCaterpillar(ranef(recall.glmer.0), QQ=F)
 ggsave(paste0(fig_path,"recall_ranef.png"), height = 6, width = 4, 
        units = "in", dpi = 600)
 
+# FOK MEANS - TRIALS (LINEAR)
+ggsave(filename = paste0(fig_path,"fok_trial_1.png"), plot = fok.plot.1,
+       height = 5, width = 4, units = "in", dpi = 600)
+
+# FOK MEANS - TRIALS (LOESS)
+ggsave(filename = paste0(fig_path,"fok_trial_2.png"), plot = fok.plot.2,
+       height = 5, width = 4, units = "in", dpi = 600)
+
+# FOK MEANS - TRIALS (ALL + UNRECALLED ITEMS)
+ggsave(filename = paste0(fig_path,"fok_trial_3.png"), plot = fok.plot.5,
+       height = 4, width = 6, units = "in")
+
+# FOK MEANS - CONIDITON (ALL + UNRECALLED ITEMS)
+ggsave(filename = paste0(fig_path,"fok_means_1.png"), plot = fok.plot.6,
+       height = 4, width = 6, units = "in")
+
+# FOK MEANS - RECALL OUTCOMES
+ggsave(filename = paste0(fig_path,"fok_means_2.png"), plot = fok.plot.7,
+       height = 4, width = 7, units = "in")
+
 # FOK-RECOG GAMMA MEANS
 ggsave(filename = paste0(fig_path,"fok_gamma_1.png"), plot = fok.gamma.plot.1,
        height = 4, width = 5.5, units = "in")
@@ -98,8 +118,8 @@ recall.plot.3.alt <-
   xlab(" ") +
   theme(axis.title.y = element_blank(),
         axis.text.y = element_blank(),
-        legend.position = c(0.5,0.8),
-        plot.title = element_text(face = "bold"))
+        plot.title = element_text(face = "bold"),
+        legend.position = "right")
 
 recall.lin.loess.plot <-
   (recall.plot.2.alt + recall.plot.3.alt) +
@@ -108,4 +128,33 @@ recall.lin.loess.plot <-
 
 ## Save figure
 ggsave(filename = paste0(fig_path,"recall_lin_loess.png"), plot = recall.lin.loess.plot,
+       height = 5, width = 7, units = "in")
+
+# Combine linear and Loess FOK figures
+
+fok.plot.1.alt <- 
+  fok.plot.1 +
+  ggtitle("Linear") +
+  xlab(" ") +
+  theme(axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none",
+        plot.title = element_text(face = "bold"))
+
+fok.plot.2.alt <-
+  fok.plot.2 +
+  ggtitle("Loess") +
+  xlab(" ") +
+  theme(axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "right",
+        plot.title = element_text(face = "bold"))
+
+fok.lin.loess.plot <-
+  (fok.plot.1.alt + fok.plot.2.alt) +
+  plot_annotation(subtitle = "Trial (Within Block)",
+                  theme = theme(plot.subtitle = element_text(hjust=0.525, vjust = -138, size = 12)))
+
+## Save figure
+ggsave(filename = paste0(fig_path,"fok_lin_loess.png"), plot = fok.lin.loess.plot,
        height = 5, width = 7, units = "in")

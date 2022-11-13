@@ -32,6 +32,34 @@ These are optional notes.
 These are optional notes.
 :::
 
+## Mean FOKs
+
+![](./img/fok_means_1.png)
+
+
+::: {.notes}
+These are optional notes.
+:::
+
+## Mean FOKs by Recall Outcome
+
+![](./img/fok_means_2.png)
+
+
+::: {.notes}
+These are optional notes.
+:::
+
+## Mean FOKs Across Trials
+
+![](./img/fok_trial_3.png)
+
+
+::: {.notes}
+These are optional notes.
+:::
+
+
 ## Mean FOK x 4AFC Gammas
 
 ![](./img/fok_gamma_1.png)

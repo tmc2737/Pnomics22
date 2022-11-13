@@ -37,6 +37,10 @@ oi_dat$Condition <- factor(oi_dat$Condition, levels = c("Related","Unrelated"))
 oi_dat$Recall_Err <- as.factor(oi_dat$Recall_Err)
 oi_dat$Participant <- as.factor(oi_dat$Participant)
 
+# Renumber Cycles and Cycle Trials (they are indexed at 0)
+oi_dat$Cycle <- oi_dat$Cycle + 1
+oi_dat$CycleTrial <- oi_dat$CycleTrial + 1
+
 # Put omission and comission rates into separate columns
 oi_dat$Omission <- 0
 oi_dat$Commission <- 0
@@ -70,3 +74,6 @@ oi_dat$RCJ_personmean <- ave(oi_dat$RCJ_RESP, oi_dat$Participant, FUN = function
 oi_dat$RCJ_pcenter <- oi_dat$RCJ_RESP - oi_dat$RCJ_personmean
 oi_dat$FOK_personmean <- ave(oi_dat$FOK_RESP, oi_dat$Participant, FUN = function(x) mean(x, na.rm = T))
 oi_dat$FOK_pcenter <- oi_dat$FOK_RESP - oi_dat$FOK_personmean
+
+# Extract unrecalled items
+oi_dat_un <- subset(oi_dat, Recall_ACC == 0)

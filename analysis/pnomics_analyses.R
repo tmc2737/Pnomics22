@@ -76,7 +76,8 @@ recog.plot.1 <-
           strip.text.x = element_text(size = 11, face = "bold")) +
     scale_fill_manual(values=gt_palette)+
     geom_hline(yintercept = 0) +
-    guides(fill = "none")
+    guides(fill = "none") + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 1)) 
 
 ################################################################################
 ## CUED RECALL ACC
@@ -110,7 +111,8 @@ recall.plot.1 <-
           strip.text.x = element_text(size = 11, face = "bold")) +
     scale_fill_manual(values=gt_palette)+
     geom_hline(yintercept = 0) +
-    guides(fill = "none")
+    guides(fill = "none") + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 1)) 
 
 # MEANS BY TRIAL
 recall.means.3 <- data_summary(oi_dat, varname = "Recall_ACC", 
@@ -123,16 +125,14 @@ for (p in unique(oi_dat$Participant)){
 }
 recall.means.4 <- data_summary(recall.means.3, varname = "Recall_ACC", 
                               groupnames = c("Condition","CycleTrial"))
-recall.means.4$CycleTrial <- recall.means.4$CycleTrial+1
 recall.means.5 <- data_summary(recall.means.3, varname = "Recall_Cent", 
                               groupnames = c("Condition","CycleTrial"))
 
 ## Plot the means
 recall.plot.2 <- 
   ggplot(recall.means.4, aes(x = CycleTrial, y = Recall_ACC, color = Condition)) +
-    geom_point() +
-    geom_errorbar(aes(ymin = Recall_ACC - se, ymax = Recall_ACC + se)) +
-    #geom_smooth(method = "loess", se = F, linetype = 2, alpha = 0.1) +
+    geom_point(alpha = 0.4) +
+    geom_errorbar(aes(ymin = Recall_ACC - se, ymax = Recall_ACC + se), alpha = 0.4) +
     geom_smooth(method = "lm") +
     xlab("Trial (Within Recall Cycle)") +
     ylab("% Recalled") +
@@ -167,9 +167,6 @@ recall.plot.3 <-
   scale_x_continuous(breaks = seq(1,10))
 
 
-# MEANS BY TRIAL WITHIN RECALL BLOCK
-
-
 # MEANS BY TRIAL - LOGIT MLM - RANDOM INTERCEPTS
 
 ## Intercept model
@@ -183,6 +180,200 @@ recall.glmer.1 <- glmer(Recall_ACC ~ Condition*CycleTrial + (1|Participant),
 ## Model with condition + trial within blocks
 recall.glmer.2 <- glmer(Recall_ACC ~ Condition*Cycle*CycleTrial + (1|Participant),
                         family = binomial(link="logit"), data = oi_dat)
+
+################################################################################
+## FOKS 
+################################################################################
+
+# Means across trials (all items)
+
+fok.means.1 <- data_summary(oi_dat, varname = "FOK_RESP", 
+                            groupnames = c("Participant","Condition","CycleTrial"))
+fok.means.2 <- data_summary(fok.means.1, varname = "FOK_RESP",
+                            groupnames = c("Condition","CycleTrial"))
+fok.means.2$Type <- "All Items"
+
+## Plot (linear regression)
+fok.plot.1 <- 
+  ggplot(fok.means.2, aes(x = CycleTrial, y = FOK_RESP, color = Condition)) +
+    geom_point(alpha = 0.4) +
+    geom_errorbar(aes(ymin = FOK_RESP - se, ymax = FOK_RESP + se), alpha = 0.4) +
+    geom_smooth(method = "lm") +
+    xlab("Trial (Within Recall Cycle)") +
+    ylab("FOK") +
+    ylim(50,70) +
+    theme(plot.title = element_text(hjust=0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line.x = element_line(), 
+          axis.line.y = element_line(), 
+          legend.position = c(.8,.9), 
+          panel.background = element_rect(fill='white', color = "black"),
+          strip.text.x = element_text(size = 11, face = "bold")) +
+    scale_color_manual(values=gt_palette) +
+    scale_x_continuous(breaks = seq(1,10))
+
+## Plot (Loess regression)
+fok.plot.2 <- 
+  ggplot(fok.means.2, aes(x = CycleTrial, y = FOK_RESP, color = Condition)) +
+    geom_smooth(method = "loess", se = F) +
+    xlab("Trial (Within Recall Cycle)") +
+    ylab("FOK") +
+    ylim(50,70) +
+    theme(plot.title = element_text(hjust=0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line.x = element_line(), 
+          axis.line.y = element_line(), 
+          legend.position = c(.8,.9), 
+          panel.background = element_rect(fill='white', color = "black"),
+          strip.text.x = element_text(size = 11, face = "bold")) +
+    scale_color_manual(values=gt_palette) +
+    scale_x_continuous(breaks = seq(1,10))
+
+
+# Means across trials (unrecalled items)
+
+fok.means.3 <- data_summary(oi_dat_un, varname = "FOK_RESP", 
+                            groupnames = c("Participant","Condition","CycleTrial"))
+fok.means.4 <- data_summary(fok.means.3, varname = "FOK_RESP",
+                            groupnames = c("Condition","CycleTrial"))
+fok.means.4$Type <- "Unrecalled Items"
+
+## Plot (linear regression)
+fok.plot.3 <- 
+  ggplot(fok.means.4, aes(x = CycleTrial, y = FOK_RESP, color = Condition)) +
+    geom_point(alpha = 0.4) +
+    geom_errorbar(aes(ymin = FOK_RESP - se, ymax = FOK_RESP + se), alpha = 0.4) +
+    geom_smooth(method = "lm") +
+    xlab("Trial (Within Recall Cycle)") +
+    ylab("FOK") +
+    ylim(30,50) +
+    theme(plot.title = element_text(hjust=0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line.x = element_line(), 
+          axis.line.y = element_line(), 
+          legend.position = c(.8,.9), 
+          panel.background = element_rect(fill='white', color = "black"),
+          strip.text.x = element_text(size = 11, face = "bold")) +
+    scale_color_manual(values=gt_palette) +
+    scale_x_continuous(breaks = seq(1,10))
+
+## Plot (Loess regression)
+fok.plot.4 <- 
+  ggplot(fok.means.4, aes(x = CycleTrial, y = FOK_RESP, color = Condition)) +
+    geom_smooth(method = "loess", se = F) +
+    xlab("Trial (Within Recall Cycle)") +
+    ylab("FOK") +
+    ylim(30,50) +
+    theme(plot.title = element_text(hjust=0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line.x = element_line(), 
+          axis.line.y = element_line(), 
+          legend.position = c(.8,.9), 
+          panel.background = element_rect(fill='white', color = "black"),
+          strip.text.x = element_text(size = 11, face = "bold")) +
+    scale_color_manual(values=gt_palette) +
+    scale_x_continuous(breaks = seq(1,10))
+
+# Plot all items + unrecalled items together
+fok.means.5 <- rbind(fok.means.2,fok.means.4)
+
+fok.plot.5 <- 
+  ggplot(fok.means.5, aes(x = CycleTrial, y = FOK_RESP, color = Condition)) +
+    geom_point(alpha = 0.4) +
+    geom_errorbar(aes(ymin = FOK_RESP - se, ymax = FOK_RESP + se), alpha = 0.4) +
+    geom_smooth(method = "lm") +
+    xlab("Trial (Within Recall Cycle)") +
+    ylab("FOK") +
+    facet_grid(.~Type) +
+    theme_base() +
+    theme(plot.title = element_text(hjust=0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line.x = element_line(), 
+          axis.line.y = element_line(), 
+          #legend.position = c(.8,.8), 
+          panel.background = element_rect(fill='white', color = "black"),
+          strip.text.x = element_text(size = 14, face = "bold"),
+          legend.title = element_text(size=12),
+          legend.text = element_text(size=10),
+          plot.background = element_blank()) +
+    scale_color_manual(values=gt_palette) +
+    scale_x_continuous(breaks = seq(1,10))
+
+# Means by condition - All Items
+fok.means.6 <- data_summary(oi_dat, varname = "FOK_RESP", 
+                            groupnames = c("Participant","Condition"))
+fok.means.7 <- data_summary(fok.means.6, varname = "FOK_RESP", 
+                            groupnames = c("Condition"))
+fok.means.7$Type <- "All Items"
+
+# Means by condition - Unrecalled Items
+fok.means.8 <- data_summary(oi_dat_un, varname = "FOK_RESP", 
+                           groupnames = c("Participant","Condition"))
+fok.means.9 <- data_summary(fok.means.8, varname = "FOK_RESP", 
+                            groupnames = c("Condition"))
+fok.means.9$Type <- "Unrecalled Items"
+
+## Plot the means
+fok.means.10 <- rbind(fok.means.7,fok.means.9)
+
+fok.plot.6 <-
+  ggplot(fok.means.10, aes(x=Condition, y=FOK_RESP, fill=Condition)) + 
+  labs(x = "Condition", y = "FOK") + 
+  ylim(0,100) +
+  geom_bar(stat="identity", color="black", position=position_dodge()) +
+  geom_errorbar(aes(ymin=FOK_RESP-se, ymax=FOK_RESP+se), width=.2, position=position_dodge(.9)) +
+  facet_grid(.~Type) +
+  theme_base() +
+  theme(plot.title = element_text(hjust=0.5), 
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.line.x = element_line(), 
+        axis.line.y = element_line(), 
+        legend.position = "none", 
+        panel.background = element_rect(fill='white', color = "black"),
+        strip.text.x = element_text(size = 14, face = "bold"),
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        plot.background = element_blank()) +
+  scale_fill_manual(values=gt_palette) + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 100)) 
+
+# Means by recall outcome
+fok.means.11 <- data_summary(oi_dat, varname = "FOK_RESP",
+                             groupnames = c("Participant","Condition","Recall_Err"))
+fok.means.12 <- data_summary(fok.means.11, varname = "FOK_RESP",
+                             groupnames = c("Condition","Recall_Err"))
+fok.means.12$Recall_Err <- factor(fok.means.12$Recall_Err, 
+                                  levels = c("Correct","Comm","Omm"),
+                                  labels = c("Correct","Commission","Omission"))
+
+## Plot the means
+fok.plot.7 <-
+  ggplot(fok.means.12, aes(x=Recall_Err, y=FOK_RESP, fill=Recall_Err)) + 
+  labs(x = "Recall Outcome", y = "FOK") + 
+  ylim(0,100) +
+  geom_bar(stat="identity", color="black", position=position_dodge()) +
+  geom_errorbar(aes(ymin=FOK_RESP-se, ymax=FOK_RESP+se), width=.2, position=position_dodge(.9)) +
+  facet_grid(.~Condition) +
+  theme_base() +
+  theme(plot.title = element_text(hjust=0.5), 
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.line.x = element_line(), 
+        axis.line.y = element_line(), 
+        legend.position = "none", 
+        panel.background = element_rect(fill='white', color = "black"),
+        strip.text.x = element_text(size = 14, face = "bold"),
+        legend.title = element_text(size=12),
+        legend.text = element_text(size=10),
+        plot.background = element_blank()) +
+  scale_fill_manual(values=gt_palette) + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 100)) 
 
 ################################################################################
 ## FOK X RECOG GAMMAS
@@ -375,14 +566,37 @@ part.gamma.figure.1 <-
           plot.background = element_blank())
 
 # Part-set gammas - All items
-
-## Means
 part.gamma.means.4 <- data_summary(part_set_gamma, varname = "FOK_Gamma",
-                                   groupnames = c("Comparison","Condition"))
+                                   groupnames = c("Condition","Comparison"))
+colnames(part.gamma.means.4) <- c("Condition","Comparison","Gamma","sd","se")
+part.gamma.means.4$Type <- "All Items"
 
 # Part-set gammas - Unrecalled items
 part.gamma.means.5 <- data_summary(part_set_gamma, varname = "FOK_Gamma_Un",
-                                   groupnames = c("Comparison","Condition"))
+                                   groupnames = c("Condition","Comparison"))
+colnames(part.gamma.means.5) <- c("Condition","Comparison","Gamma","sd","se")
+part.gamma.means.5$Type <- "Unrecalled Items"
+
+## Plot results
+part.gamma.means.6 <- rbind(part.gamma.means.4,part.gamma.means.5)
+part.gamma.figure.2 <-
+  ggplot(part.gamma.means.6, aes(x=Comparison,y=Gamma,fill=Condition)) +
+  geom_bar(stat = "identity", color="black", width=0.8) +
+  geom_errorbar(aes(ymin = Gamma - se, ymax = Gamma + se), width = 0.5) +
+  geom_hline(yintercept = 0.0, lty=3) +
+  facet_grid(Condition~Type) +
+  #ylim(-0.25,0.5) +
+  scale_fill_manual(values=gt_palette) +
+  theme_base() +
+  theme(legend.position = "none",
+        strip.text.x = element_text(face = "bold"),
+        plot.background = element_blank())
+
+################################################################################
+## R/K/N
+################################################################################
+
+
 
 ################################################################################
 ## SAVE DATA
