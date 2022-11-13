@@ -52,31 +52,31 @@ ggsave(filename = paste0(fig_path,"fok_trial_2.png"), plot = fok.plot.2,
 
 # FOK MEANS - TRIALS (ALL + UNRECALLED ITEMS)
 ggsave(filename = paste0(fig_path,"fok_trial_3.png"), plot = fok.plot.5,
-       height = 4, width = 6, units = "in")
+       height = 4, width = 6, units = "in", dpi = 600)
 
 # FOK MEANS - CONIDITON (ALL + UNRECALLED ITEMS)
 ggsave(filename = paste0(fig_path,"fok_means_1.png"), plot = fok.plot.6,
-       height = 4, width = 6, units = "in")
+       height = 4, width = 6, units = "in", dpi = 600)
 
 # FOK MEANS - RECALL OUTCOMES
 ggsave(filename = paste0(fig_path,"fok_means_2.png"), plot = fok.plot.7,
-       height = 4, width = 7, units = "in")
+       height = 4, width = 7, units = "in", dpi = 600)
 
 # FOK-RECOG GAMMA MEANS
 ggsave(filename = paste0(fig_path,"fok_gamma_1.png"), plot = fok.gamma.plot.1,
-       height = 4, width = 5.5, units = "in")
+       height = 4, width = 5.5, units = "in", dpi = 600)
 
 # CJ-RECOG GAMMA MEANS
 ggsave(filename = paste0(fig_path,"cj_gamma_1.png"), plot = cj.gamma.plot.1,
-       height = 4, width = 8, units = "in")
+       height = 4, width = 8, units = "in", dpi = 600)
 
 # FOK-CJ GAMMA MEANS
 ggsave(filename = paste0(fig_path,"fok_cj_gamma.png"), plot = fok.cj.plot.1,
-       height = 4, width = 8, units = "in")
+       height = 4, width = 8, units = "in", dpi = 600)
 
 # WITHIN-SET FOK-RECOG GAMMA MEANS
 ggsave(filename = paste0(fig_path,"part_gamma_1.png"), plot = part.gamma.figure.1,
-       height = 5, width = 6, units = "in")
+       height = 5, width = 6, units = "in", dpi = 600)
 
 ################################################################################
 ## EXTRA FIGURES
@@ -102,7 +102,7 @@ recall.recog.plot <-
 
 ## Save figure
 ggsave(filename = paste0(fig_path,"recall_recog_means.png"), plot = recall.recog.plot,
-       height=5,width=6,units="in")
+       height=5,width=6,units="in", dpi = 600)
 
 # Combine linear and Loess recall figures
 recall.plot.2.alt <- 
@@ -128,7 +128,7 @@ recall.lin.loess.plot <-
 
 ## Save figure
 ggsave(filename = paste0(fig_path,"recall_lin_loess.png"), plot = recall.lin.loess.plot,
-       height = 5, width = 7, units = "in")
+       height = 5, width = 7, units = "in", dpi = 600)
 
 # Combine linear and Loess FOK figures
 
@@ -157,4 +157,4 @@ fok.lin.loess.plot <-
 
 ## Save figure
 ggsave(filename = paste0(fig_path,"fok_lin_loess.png"), plot = fok.lin.loess.plot,
-       height = 5, width = 7, units = "in")
+       height = 5, width = 7, units = "in", dpi = 600)
