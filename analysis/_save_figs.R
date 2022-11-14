@@ -6,7 +6,8 @@
 ## Date         : 11/12/22
 ################################################################################
 ## Notes        : The figure code was taking up a lot of room, so I pushed the
-##              : code to a separate file
+##              : code to a separate file. 
+##              :
 ##              :
 ################################################################################
 
@@ -77,6 +78,14 @@ ggsave(filename = paste0(fig_path,"fok_cj_gamma.png"), plot = fok.cj.plot.1,
 # WITHIN-SET FOK-RECOG GAMMA MEANS
 ggsave(filename = paste0(fig_path,"part_gamma_1.png"), plot = part.gamma.figure.1,
        height = 5, width = 6, units = "in", dpi = 600)
+
+# BETWEEN-SET FOK-RECOG GAMMA MEANS
+ggsave(filename = paste0(fig_path, "part_gamma_2.png"), plot = part.gamma.figure.2,
+       height = 5, width = 8, units = "in", dpi = 600)
+
+# RKN MEANS - BY CONDITION
+ggsave(filename = paste0(fig_path, "rkn_1.png"), plot = rkn.plot.1,
+       height = 4, width = 5, units = "in", dpi = 600)
 
 ################################################################################
 ## EXTRA FIGURES

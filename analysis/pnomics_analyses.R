@@ -9,6 +9,7 @@
 ##              : the title. Check the README file for more information.
 ##              :
 ##              :
+##              :
 ################################################################################
 
 ################################################################################
@@ -27,6 +28,7 @@ require(Hmisc)
 require(interactions)
 require(effectsize)
 require(patchwork)
+require(rstatix)
 
 # Save figures? If TRUE, then figures will write to the figure path by calling
 # the "./_save_figs.R" script
@@ -124,8 +126,6 @@ for (p in unique(oi_dat$Participant)){
           center = T, scale = F)
 }
 recall.means.4 <- data_summary(recall.means.3, varname = "Recall_ACC", 
-                              groupnames = c("Condition","CycleTrial"))
-recall.means.5 <- data_summary(recall.means.3, varname = "Recall_Cent", 
                               groupnames = c("Condition","CycleTrial"))
 
 ## Plot the means
@@ -311,12 +311,20 @@ fok.means.7 <- data_summary(fok.means.6, varname = "FOK_RESP",
                             groupnames = c("Condition"))
 fok.means.7$Type <- "All Items"
 
+## t-test + Cohen's d
+fok.means.t.1 <- t.test(FOK_RESP ~ Condition, data = fok.means.6)
+fok.means.d.1 <- cohens_d(FOK_RESP ~ Condition, data = fok.means.6)
+
 # Means by condition - Unrecalled Items
 fok.means.8 <- data_summary(oi_dat_un, varname = "FOK_RESP", 
                            groupnames = c("Participant","Condition"))
 fok.means.9 <- data_summary(fok.means.8, varname = "FOK_RESP", 
                             groupnames = c("Condition"))
 fok.means.9$Type <- "Unrecalled Items"
+
+## t-test + Cohen's d
+fok.means.t.2 <- t.test(FOK_RESP ~ Condition, data = fok.means.8)
+fok.means.d.2 <- cohens_d(FOK_RESP ~ Condition, data = fok.means.8)
 
 ## Plot the means
 fok.means.10 <- rbind(fok.means.7,fok.means.9)
@@ -352,6 +360,11 @@ fok.means.12$Recall_Err <- factor(fok.means.12$Recall_Err,
                                   levels = c("Correct","Comm","Omm"),
                                   labels = c("Correct","Commission","Omission"))
 
+## ME ANOVA + effect sizes
+fok.means.aov.1 <- anova_test(fok.means.11, dv = "FOK_RESP", between = "Condition",
+                              within = "Recall_Err", wid = "Participant",
+                              effect.size = "pes")
+
 ## Plot the means
 fok.plot.7 <-
   ggplot(fok.means.12, aes(x=Recall_Err, y=FOK_RESP, fill=Recall_Err)) + 
@@ -374,6 +387,19 @@ fok.plot.7 <-
         plot.background = element_blank()) +
   scale_fill_manual(values=gt_palette) + 
   scale_y_continuous(expand = c(0, 0), limits = c(0, 100)) 
+
+# Random intercepts MLM
+fok.lmer.0 <- lmer(FOK_RESP ~ 1 + (1|Participant), data = oi_dat)
+fok.lmer.1 <- lmer(FOK_RESP ~ Condition + Recall_ACC + CycleTrial + (1|Participant),
+                   data = oi_dat)
+fok.lmer.2 <- lmer(FOK_RESP ~ Condition*Recall_ACC*CycleTrial + (1|Participant),
+                   data = oi_dat)
+
+## Interaction plots
+fok.int.plot.1 <- interact_plot(fok.lmer.2, pred = "CycleTrial", 
+                                modx = "Condition", mod2 = "Recall_ACC")
+fok.int.slopes.1 <- sim_slopes(fok.lmer.2, pred = "CycleTrial", 
+                               modx = "Condition", mod2 = "Recall_ACC")
 
 ################################################################################
 ## FOK X RECOG GAMMAS
@@ -398,6 +424,10 @@ fok.gamma.means.2 <- data_summary(gamma_dat, varname = "FOK_Gamma_Unrecall",
                                   groupnames = c("Condition"))
 colnames(fok.gamma.means.2) <- c("Condition","Gamma","sd","se")
 fok.gamma.means.2$Type <- "Unrecalled Items"
+
+## t-tests + Cohen's d
+fok.gamma.t.2 <- t.test(FOK_Gamma_Unrecall ~ Condition, data = gamma_dat)
+fok.gamma.d.2 <- cohens_d(FOK_Gamma_Unrecall ~ Condition, data = gamma_dat)
 
 # Means plots
 fok.gamma.means.3 <- rbind(fok.gamma.means.1,fok.gamma.means.2)
@@ -485,6 +515,10 @@ fok.cj.means.1 <- data_summary(gamma_dat, varname = "FOK_CJ_Gamma",
                                groupnames = "Condition")
 colnames(fok.cj.means.1) <- c("Condition","Gamma","sd","se")
 fok.cj.means.1$Type <- "All Items"
+
+## t-test + Cohen's d
+fok.cj.t.1 <- t.test(FOK_CJ_Gamma ~ Condition, data = gamma_dat)
+fok.cj.d.1 <- cohens_d(FOK_CJ_Gamma ~ Condition, data = gamma_dat)
 
 # Unrecalled Items
 
@@ -596,6 +630,33 @@ part.gamma.figure.2 <-
 ## R/K/N
 ################################################################################
 
+# Means by condition 
+
+rkn_means <- data_summary(merge.1.2, varname = "Percent", groupnames = c("Condition", "Rating"))
+rkn_means$Rating <- factor(rkn_means$Rating, levels = c("R","K","N"),
+                           labels = c("Remember","Know","No Memory"))
+
+## ME ANOVA
+## (sphericity is violated)
+rkn.aov.1 <- anova_test(merge.1.2, dv = "Percent", between = "Condition",
+                        within = "Rating", wid = "Participant")
+
+## Plot the means
+rkn.plot.1 <- 
+  ggplot(rkn_means, aes(x=Condition, y=Percent, fill=Rating)) + 
+    labs(x = "Condition", y = "% Endorsed") + 
+    ylim(0,1) +
+    geom_bar(stat="identity", color="black", position=position_dodge()) +
+    geom_errorbar(aes(ymin=Percent-se, ymax=Percent+se), width=.2, position=position_dodge(.9)) +
+    theme(plot.title = element_text(hjust=0.5), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+          axis.line.x = element_line(), axis.line.y = element_line(), legend.title = element_blank(),
+          legend.position = c(.8,.8), panel.background = element_rect(fill='white', color = "black"),
+          strip.text.x = element_text(size = 11, face = "bold")) +
+    geom_hline(yintercept = 0) + 
+    scale_fill_manual(values=gt_palette) + 
+    scale_y_continuous(expand = c(0, 0), limits = c(0, 1))
+
+# Means across trials
 
 
 ################################################################################

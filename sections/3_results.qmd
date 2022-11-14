@@ -6,10 +6,10 @@
 ::: {.column width="50%"}
 
 - Both Related (_M_ = 0.36) and Unrelated Cues (_M_ = 0.38) conditions had similar overall levels of cued recall accuracy.
-  + _t_(74) = 0.34, _p_ = 0.73, _d_ = 0.09
+  + _t_(73.8) = 0.34, _p_ = 0.73, _d_ = 0.09
 
 - Both Related (_M_ = 0.67) and Unrelated (_M_ = 0.65) Cues conditions also had similar 4AFC accuracy.
-  + _t_(74) = 0.48, _p_ = 0.64, _d_ = 0.11
+  + _t_(71.3) = 0.48, _p_ = 0.64, _d_ = 0.11
 
 :::
 ::: {.column width="50%"}
@@ -20,7 +20,17 @@
 ::::
 
 ::: {.notes}
-These are optional notes.
+Recog: 
+
+- M_Related = 0.67, SE_Related = 0.03 
+- M_Unrelated = 0.65, SE_Unrelated = 0.04 
+- _t_(71.26) = 0.48, _p_ = 0.64, _d_ = 0.11.
+
+Recall: 
+
+- M_Related = 0.36, SE_Related = 0.04 
+- M_Unrelated = 0.38, SE_Unrelated = 0.04
+- _t_(73.79) = 0.34, _p_ = 0.73, _d_ = 0.09.
 :::
 
 ## Output Interference
@@ -29,7 +39,12 @@ These are optional notes.
 
 
 ::: {.notes}
-These are optional notes.
+Output of random-intercepts MLM:
+
+- Intercept: _b_ = -0.6, _SE_ = 0.22, _z_ = -2.74, _p_ = 0.01
+- Condition (Unrelated): _b_ = -0.15, _SE_ = 0.34, _z_ = -0.45, _p_ = 0.65
+- Trial (within cycle): _b_ = -0.03, _SE_ = 0.02, _z_ = -1.35, _p_ = 0.18
+- Condition (Unrelated) x Trial: _b_ = 0.04, _SE_ = 0.03, _z_ = 1.32, _p_ = 0.19
 :::
 
 ## Mean FOKs
@@ -38,7 +53,17 @@ These are optional notes.
 
 
 ::: {.notes}
-These are optional notes.
+All items:
+
+- M_Related = 57.12, SE_Related = 2.88
+- M_Unrelated = 56.98, SE_Unrelated = 56.98
+- _t_(74.04) = 0.03, _p_ = 0.98, _d_ < 0.01
+
+Unrecalled items:
+
+- M_Related = 40.98, SE_Related = 2.89
+- M_Unrelated = 41.65, SE_Unrelated = 3.20
+- _t_(77.58) = -0.08, _p_ = 0.93, _d_ = -0.02
 :::
 
 ## Mean FOKs by Recall Outcome
@@ -47,7 +72,16 @@ These are optional notes.
 
 
 ::: {.notes}
-These are optional notes.
+Mixed-effects ANOVA:
+
+- Condition: _F_(1,68) = 0.10, _p_ = 0.92, pes < 0.01
+- Recall Outcome: _F_(2,136) = 242.54, _p_ < 0.05, pes = 0.78
+- Condition x Outcome: _F_(2,136) = 0.51. _p_ = 0.60, pes < 0.01
+
+Means:
+
+- Related: M_Correct = 87.03, SE_correct = 1.43, M_Comm = 52.06, SE_Comm = 3.11, M_Om = 32.02, SE_Om = 3.49 
+- Unrelated: M_Correct = 86.25, SE_correct = 2.35, M_Comm = 51.25, SE_Comm = 3.36, M_Om = 35.55, SE_Om = 4.08
 :::
 
 ## Mean FOKs Across Trials
@@ -56,7 +90,22 @@ These are optional notes.
 
 
 ::: {.notes}
-These are optional notes.
+Random-intercepts MLM:
+
+- Condition: _F_(1,172.1) = 0.83, _p_ = 0.36
+- Recall: _F_(1,3180.3) = 562.67, _p_ < 0.05
+- Trial (within Cycle): _F_(1,3151.3) = 3.07, _p_ = 0.08
+- Condition x Recall: _F_(1,3180.3) = 0.47, _p_ = 0.49
+- Condition x Trial: _F_(1,3151.3) = 3.19, _p_ = 0.07
+- Recall x Trial: _F_(1,3155.4) < 0.01, _p_ = 0.97
+- Condition x Recall x Trial: _F_(1,3155.4) = 2.32, _p_ = 0.13
+
+Simple slopes from 3-way interaction:
+
+- Related, Unrecalled: _b_ = -0.64, _SE_ = 0.24, _t_ = -2.70, _p_ < 0.05
+- Related, Recalled: _b_ = -0.21, _SE_ = 0.30, _t_ = -0.68, _p_ = 0.49
+- Unrelated, Unrecalled: _b_ = 0.01, _SE_ = 0.27, _t_ = 0.02, _p_ = 0.98
+- Unrelated, Recalled: _b_ = -0.46, _SE_ = 0.35, _t_ = -1.31, _p_ = 0.19
 :::
 
 
@@ -65,7 +114,17 @@ These are optional notes.
 ![](./img/fok_gamma_1.png)
 
 ::: {.notes}
-These are optional notes.
+All items:
+
+- M_Related = 0.33, SE_Related = 0.03
+- M_Unrelated = 0.35, SE_Unrelated = 0.05
+- _t_(69.05) = -0.20, _p_ = 0.84, _d_ = 0.05
+
+Unrecalled items:
+
+- M_Related = 0.13, SE_Related = 0.04
+- M_Unrelated = 0.14, SE_Unrelated = 0.06
+- _t_(64.56) = -0.13, _p_ = 0.90, _d_ = 0.03
 :::
 
 ## Mean RCJ x 4AFC Gammas
@@ -73,7 +132,17 @@ These are optional notes.
 ![](./img/cj_gamma_1.png)
 
 ::: {.notes}
-These are optional notes.
+All items:
+
+- M_Related = 0.65, SE_Related = 0.04
+- M_Unrelated = 0.66, SE_Unrelated = 0.05
+- _t_(70.30) = -0.15, _p_ = 88, _d_ = 0.03
+
+Unrecalled items:
+
+- M_Related = 0.49, SE_Related = 0.05
+- M_Unrelated = 0.53, SE_Unrelated = 0.06
+- _t_(66.52) = -0.53, _p_ = 0.59, _d_ = 0.12
 :::
 
 ## Mean FOK x RCJ Gammas
@@ -81,7 +150,17 @@ These are optional notes.
 ![](./img/fok_cj_gamma.png)
 
 ::: {.notes}
-These are optional notes.
+All items:
+
+- M_Related = 0.26, SE_Related = 0.03
+- M_Unrelated = 0.26, SE_Unrelated = 0.02
+- _t_(82.70) = 0.03, _p_ = 0.98, _d_ < 0.01
+
+Unrecalled items:
+
+- M_Related = , SE_Related = 
+- M_Unrelated = , SE_Unrelated = 
+- _t_() = , _p_ = , _d_ = 
 :::
 
 ## Within-bin FOK x 4AFC Gammas
@@ -94,6 +173,17 @@ These are optional notes.
 
 ## Part-set FOK x 4AFC Gammas
 
+![](./img/part_gamma_2.png)
+
 ::: {.notes}
 These are optional notes.
 :::
+
+## R/K/N Rates by Condition
+
+![](./img/rkn_1.png)
+
+::: {.notes}
+These are optional notes.
+:::
+
