@@ -184,6 +184,31 @@ These are optional notes.
 ![](./img/rkn_1.png)
 
 ::: {.notes}
-These are optional notes.
+ME ANOVA w/ DF correction using Huyhn-Feldt
+
+- Condition: _F_(1,83) = 0.26, _p_ = 0.61, pes < 0.01
+- Rating: _F_(1.62,134.55) = 4.85, _p_ = 0.01, pes = 0.06
+- Condition x Rating: _F_(1.62,134.55) = 0.14, _p_ = 0.83, pes < 0.01 
 :::
 
+## R/K/N Rates Across Trials
+
+![](./img/rkn_2.png)
+
+::: {.notes}
+Multinomial logistic regression output. The coefficients are log-odds against the reference group (Related Cues, "Remember").
+
+KNOW: 
+
+- Intercept: _b_ = -0.151, _z_ = -1.01, _p_ = 0.23
+- Condition (Unrelated): _b_ = -0.064, _z_ = -0.33, _p_ = 0.74
+- Trial (within cycle): _b_ < -0.01, _z_ = -0.46, _p_ = 0.65
+- Condition x Trial: _b_ = -0.013, _z_ = -0.42, _p_ = 0.68
+
+NO MEMORY:
+
+- Intercept: _b_ = -0.173, _z_ = -1.21, _p_ = 0.23
+- Condition (Unrelated): _b_ = 0.441, _z_ = 2.46, _p_ = 0.01
+- Trial (within cycle): _b_ = 0.058, _z_ = 3.02, _p_ < 0.01
+- Condition x Trial: _b_ = -0.084, _z_ = -2.93, _p_ < 0.01
+:::

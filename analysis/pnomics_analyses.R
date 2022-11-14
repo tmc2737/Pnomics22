@@ -29,13 +29,15 @@ require(interactions)
 require(effectsize)
 require(patchwork)
 require(rstatix)
+require(nnet)
 
 # Save figures? If TRUE, then figures will write to the figure path by calling
 # the "./_save_figs.R" script
-save_fig <- F
+save_fig <- T
 
-# Set custom color palette
+# Set custom color palettes
 gt_palette <- c("#0286ce","#eaaa00","#D6DBD4","#AD4025","#545454")
+gt_palette2 <- c("#0286ce","#eaaa00","#AD4025","#D6DBD4","#545454")
 
 # Import custom functions
 source("./_helper_functions.R")
@@ -208,6 +210,7 @@ fok.plot.1 <-
           axis.line.x = element_line(), 
           axis.line.y = element_line(), 
           legend.position = c(.8,.9), 
+          legend.background = element_blank(),
           panel.background = element_rect(fill='white', color = "black"),
           strip.text.x = element_text(size = 11, face = "bold")) +
     scale_color_manual(values=gt_palette) +
@@ -226,6 +229,7 @@ fok.plot.2 <-
           axis.line.x = element_line(), 
           axis.line.y = element_line(), 
           legend.position = c(.8,.9), 
+          legend.background = element_blank(),
           panel.background = element_rect(fill='white', color = "black"),
           strip.text.x = element_text(size = 11, face = "bold")) +
     scale_color_manual(values=gt_palette) +
@@ -255,6 +259,7 @@ fok.plot.3 <-
           axis.line.x = element_line(), 
           axis.line.y = element_line(), 
           legend.position = c(.8,.9), 
+          legend.background = element_blank(),
           panel.background = element_rect(fill='white', color = "black"),
           strip.text.x = element_text(size = 11, face = "bold")) +
     scale_color_manual(values=gt_palette) +
@@ -273,6 +278,7 @@ fok.plot.4 <-
           axis.line.x = element_line(), 
           axis.line.y = element_line(), 
           legend.position = c(.8,.9), 
+          legend.background = element_blank(),
           panel.background = element_rect(fill='white', color = "black"),
           strip.text.x = element_text(size = 11, face = "bold")) +
     scale_color_manual(values=gt_palette) +
@@ -295,7 +301,7 @@ fok.plot.5 <-
           panel.grid.minor = element_blank(),
           axis.line.x = element_line(), 
           axis.line.y = element_line(), 
-          #legend.position = c(.8,.8), 
+          legend.background = element_blank(),
           panel.background = element_rect(fill='white', color = "black"),
           strip.text.x = element_text(size = 14, face = "bold"),
           legend.title = element_text(size=12),
@@ -331,25 +337,25 @@ fok.means.10 <- rbind(fok.means.7,fok.means.9)
 
 fok.plot.6 <-
   ggplot(fok.means.10, aes(x=Condition, y=FOK_RESP, fill=Condition)) + 
-  labs(x = "Condition", y = "FOK") + 
-  ylim(0,100) +
-  geom_bar(stat="identity", color="black", position=position_dodge()) +
-  geom_errorbar(aes(ymin=FOK_RESP-se, ymax=FOK_RESP+se), width=.2, position=position_dodge(.9)) +
-  facet_grid(.~Type) +
-  theme_base() +
-  theme(plot.title = element_text(hjust=0.5), 
-        panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank(),
-        axis.line.x = element_line(), 
-        axis.line.y = element_line(), 
-        legend.position = "none", 
-        panel.background = element_rect(fill='white', color = "black"),
-        strip.text.x = element_text(size = 14, face = "bold"),
-        legend.title = element_text(size=12),
-        legend.text = element_text(size=10),
-        plot.background = element_blank()) +
-  scale_fill_manual(values=gt_palette) + 
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 100)) 
+    labs(x = "Condition", y = "FOK") + 
+    ylim(0,100) +
+    geom_bar(stat="identity", color="black", position=position_dodge()) +
+    geom_errorbar(aes(ymin=FOK_RESP-se, ymax=FOK_RESP+se), width=.2, position=position_dodge(.9)) +
+    facet_grid(.~Type) +
+    theme_base() +
+    theme(plot.title = element_text(hjust=0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line.x = element_line(), 
+          axis.line.y = element_line(), 
+          legend.position = "none", 
+          panel.background = element_rect(fill='white', color = "black"),
+          strip.text.x = element_text(size = 14, face = "bold"),
+          legend.title = element_text(size=12),
+          legend.text = element_text(size=10),
+          plot.background = element_blank()) +
+    scale_fill_manual(values=gt_palette) + 
+    scale_y_continuous(expand = c(0, 0), limits = c(0, 100)) 
 
 # Means by recall outcome
 fok.means.11 <- data_summary(oi_dat, varname = "FOK_RESP",
@@ -368,25 +374,25 @@ fok.means.aov.1 <- anova_test(fok.means.11, dv = "FOK_RESP", between = "Conditio
 ## Plot the means
 fok.plot.7 <-
   ggplot(fok.means.12, aes(x=Recall_Err, y=FOK_RESP, fill=Recall_Err)) + 
-  labs(x = "Recall Outcome", y = "FOK") + 
-  ylim(0,100) +
-  geom_bar(stat="identity", color="black", position=position_dodge()) +
-  geom_errorbar(aes(ymin=FOK_RESP-se, ymax=FOK_RESP+se), width=.2, position=position_dodge(.9)) +
-  facet_grid(.~Condition) +
-  theme_base() +
-  theme(plot.title = element_text(hjust=0.5), 
-        panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank(),
-        axis.line.x = element_line(), 
-        axis.line.y = element_line(), 
-        legend.position = "none", 
-        panel.background = element_rect(fill='white', color = "black"),
-        strip.text.x = element_text(size = 14, face = "bold"),
-        legend.title = element_text(size=12),
-        legend.text = element_text(size=10),
-        plot.background = element_blank()) +
-  scale_fill_manual(values=gt_palette) + 
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 100)) 
+    labs(x = "Recall Outcome", y = "FOK") + 
+    ylim(0,100) +
+    geom_bar(stat="identity", color="black", position=position_dodge()) +
+    geom_errorbar(aes(ymin=FOK_RESP-se, ymax=FOK_RESP+se), width=.2, position=position_dodge(.9)) +
+    facet_grid(.~Condition) +
+    theme_base() +
+    theme(plot.title = element_text(hjust=0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line.x = element_line(), 
+          axis.line.y = element_line(), 
+          legend.position = "none", 
+          panel.background = element_rect(fill='white', color = "black"),
+          strip.text.x = element_text(size = 14, face = "bold"),
+          legend.title = element_text(size=12),
+          legend.text = element_text(size=10),
+          plot.background = element_blank()) +
+    scale_fill_manual(values=gt_palette) + 
+    scale_y_continuous(expand = c(0, 0), limits = c(0, 100)) 
 
 # Random intercepts MLM
 fok.lmer.0 <- lmer(FOK_RESP ~ 1 + (1|Participant), data = oi_dat)
@@ -637,9 +643,10 @@ rkn_means$Rating <- factor(rkn_means$Rating, levels = c("R","K","N"),
                            labels = c("Remember","Know","No Memory"))
 
 ## ME ANOVA
-## (sphericity is violated)
 rkn.aov.1 <- anova_test(merge.1.2, dv = "Percent", between = "Condition",
-                        within = "Rating", wid = "Participant")
+                        within = "Rating", wid = "Participant", effect.size = "pes")
+## Correct for violations of sphericity using Hyuhn-Feldt
+get_anova_table(rkn.aov.1, correction = "HF")
 
 ## Plot the means
 rkn.plot.1 <- 
@@ -648,9 +655,15 @@ rkn.plot.1 <-
     ylim(0,1) +
     geom_bar(stat="identity", color="black", position=position_dodge()) +
     geom_errorbar(aes(ymin=Percent-se, ymax=Percent+se), width=.2, position=position_dodge(.9)) +
-    theme(plot.title = element_text(hjust=0.5), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-          axis.line.x = element_line(), axis.line.y = element_line(), legend.title = element_blank(),
-          legend.position = c(.8,.8), panel.background = element_rect(fill='white', color = "black"),
+    theme(plot.title = element_text(hjust=0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line.x = element_line(), 
+          axis.line.y = element_line(), 
+          legend.title = element_blank(),
+          legend.position = c(.8,.8), 
+          legend.background = element_blank(),
+          panel.background = element_rect(fill='white', color = "black"),
           strip.text.x = element_text(size = 11, face = "bold")) +
     geom_hline(yintercept = 0) + 
     scale_fill_manual(values=gt_palette) + 
@@ -658,6 +671,32 @@ rkn.plot.1 <-
 
 # Means across trials
 
+## Multinomial regression - extract estimates, z-values, and p-values
+rkn.multi.1 <- multinom(RKN_GROUP ~ Condition*CycleTrial, data = oi_dat)
+rkn.multi.1.z <- summary(rkn.multi.1)$coefficients/summary(rkn.multi.1)$standard.errors
+rkn.multi.1.p <- (1 - pnorm(abs(rkn.multi.1.z), 0, 1)) * 2
+
+## Plot the means
+rkn.plot.2 <- 
+  ggplot(rkn_means_2, aes(x = CycleTrial, y = Percent, color = Rating)) +
+    xlab("Trial (Within Recall Cycle)") + 
+    ylab("% Endorsement") +
+    geom_smooth(method = "lm") +
+    facet_grid(.~ Condition) + 
+    scale_color_manual(values=gt_palette2) +
+    scale_x_continuous(breaks = seq(1,10)) +
+    theme_base() +
+    theme(plot.title = element_text(hjust=0.5), 
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line.x = element_line(), 
+          axis.line.y = element_line(), 
+          panel.background = element_rect(fill='white', color = "black"),
+          strip.text.x = element_text(size = 14, face = "bold"),
+          legend.title = element_text(size=12),
+          legend.text = element_text(size=10),
+          legend.background = element_blank(),
+          plot.background = element_blank())
 
 ################################################################################
 ## SAVE DATA

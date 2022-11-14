@@ -87,6 +87,10 @@ ggsave(filename = paste0(fig_path, "part_gamma_2.png"), plot = part.gamma.figure
 ggsave(filename = paste0(fig_path, "rkn_1.png"), plot = rkn.plot.1,
        height = 4, width = 5, units = "in", dpi = 600)
 
+# RKN MEANS - BY TRIAL
+ggsave(filename = paste0(fig_path,"rkn_2.png"), plot = rkn.plot.2,
+       height = 4, width = 6, units = "in", dpi = 600)
+
 ################################################################################
 ## EXTRA FIGURES
 ################################################################################
@@ -128,6 +132,7 @@ recall.plot.3.alt <-
   theme(axis.title.y = element_blank(),
         axis.text.y = element_blank(),
         plot.title = element_text(face = "bold"),
+        legend.background = element_blank(),
         legend.position = "right")
 
 recall.lin.loess.plot <-
@@ -157,6 +162,7 @@ fok.plot.2.alt <-
   theme(axis.title.y = element_blank(),
         axis.text.y = element_blank(),
         legend.position = "right",
+        legend.background = element_blank(),
         plot.title = element_text(face = "bold"))
 
 fok.lin.loess.plot <-

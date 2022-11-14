@@ -26,12 +26,9 @@ These are optional notes.
 ## Conditions
 
 - Individuals in the **Unrelated Cues** condition studied lists of 40 _unrelated_ cue-target word pairs.
-
-
 - Individuals in the **Related Cues** condition studied 4 lists of 10 cue-target word pairs where the cue words were _categorically-related_, but unrelated to the target words. 
-
-  - Cue words were selected from 10 exemplars from 4 normative taxonomic categories (Van Overschelde et al., 2004).
-  - The target words were unrelated to each other.
+  + Cue words were selected from 10 exemplars from 4 normative taxonomic categories (Van Overschelde et al., 2004).
+  + The target words were unrelated to each other.
 
 Example stimuli:
 
@@ -41,7 +38,10 @@ Example stimuli:
 | OUTSIDE -	LOST | SLEET -	EAST |
 | POST - FROWN | SNOW -	PRECISE |
 | PULL - CRISP | LIGHTNING -	CIRCLE |
-| ... | ... |
+
+::: {.notes}
+These are optional notes.
+:::
 
 ::: {.notes}
 These are optional notes.

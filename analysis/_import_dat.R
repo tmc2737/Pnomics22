@@ -135,7 +135,8 @@ n_means5.2 <- melt(n_means5, id.vars = c("Condition","CycleTrial","sd","se"),
 # Merge RKN means over trials
 merge.5.1 <- merge(r_means5.2, k_means5.2, all = T)
 rkn_means_2 <- merge(merge.5.1, n_means5.2, all = T)
-rkn_means_2$Rating <- factor(rkn_means_2$Rating, levels = c("R","K","N"))
+rkn_means_2$Rating <- factor(rkn_means_2$Rating, levels = c("R","K","N"),
+                             labels = c("Remember","Know","No Memory"))
 
 # Extract unrecalled items
 oi_dat_un <- subset(oi_dat, Recall_ACC == 0)
