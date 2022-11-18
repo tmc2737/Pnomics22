@@ -2,16 +2,15 @@
 
 ## Memory Interference
 
-- Long-term memory retrieval is often affected by competing information
-  + Commonly called **memory interference**
-  + _citations here_
+- Long-term memory retrieval is often affected by competing information.
+  + Commonly called **memory interference**.
 
-- Most interference effects show increases in errors in which people recall the wrong item 
-  + i.e., errors of **commission**
-  + e.g., proactive interference (_citation_), implicit interference (_citation_) 
+- Most interference effects show increases in errors in which people recall the wrong item.
+  + i.e., errors of **commission**.
+  + e.g., proactive interference (Postman et al., 1968), implicit interference (Nelson et al., 1998). 
 
-- The implication is that memory interference states stem from similar operations; however, some interference states are different than others
-  + **Output interference (OI)**
+- The implication is that memory interference states stem from similar operations; however, some interference states are different than others.
+  + **Output interference (OI)**.
 
 ::: {.notes}
 These are optional notes.
@@ -21,7 +20,7 @@ These are optional notes.
 
 ![](./img/criss_figs.png)
 
-Errors of **omission** increase while errors of **commission** stay the same.
+Errors of **omission** increase while errors of **commission** stay the same (Wilson et al., 2020).
 
 ::: {.notes}
 These are optional notes.
@@ -29,17 +28,56 @@ These are optional notes.
 
 ## Mechanisms of OI
 
+- Most accounts of interference implicate the roles of _spreading activation_ and _competition_.
+  + _citations_
+
+- OI, however, seems to result from the act of retrieval itself (Anderson & Neely, 1996).
+
+- For example, Wilson et al. (2020) hypothesize the presence of a **retrieval filter** that limits the number of retrieval attempts.
+  + Retrieval of items later in the recall sequence inhibited by repeated retrieval of earlier items.
+  + Repeated retrievals cause memory to reach maximum number of retrieval attempts before the target item or non-criterial information related to it can be accessed.
+  + Similar to $T_{Max}$ parameter in Minerva/HyGene frameworks.
+
+- What is unknown is whether OI is a function of interference via spreading activation (i.e., a "Competition" account) or lack of access to criterial information altogheter (i.e., a "Suppression" account).
+
 ::: {.notes}
 These are optional notes.
 :::
 
 ## Memory Awareness
 
+- Metamemory judgments are sensitive to interference states, but to different degrees.
+  + e.g., Eakin (2005), Diaz & Benjamin (2008)
+
+- Eakin & Hertzog (2012) found, for example, that prospective memory judgments for irretrievable items, known as **_feelings-of-knowing_ (FOKs)**, changed in magnitude, but not in accuracy, during implicit interference.
+  + 
+
+- Sensitivity of metamemory judgments to interference states can help elucidate underlying mechanisms.
+
 ::: {.notes}
 These are optional notes.
 :::
 
 ## Current Study
+
+The current study used self-reported metamemory judgments to examine the mechanism underlying output interference during cued recall.
+
+I use feelings-of-knowing (FOKs) and Remember/Know/No Memory (R/K/N) judgments to contrast two hypotheses:
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- **Competition Hypothesis**
+  + Increases in "Know" judgements during OI, reflecting familiarity states during semantic competition.
+  + Inhibition of target recall, but not of non-criterial information, during OI; similar FOK accuracy across trials.
+:::
+
+::: {.column width="50%"}
+- **Retrieval-suppression Hypothesis**
+  + Increases in rates of "No Memory" judgments during OI; no changes in "R" or "K".
+  + Occlusion of non-criterial recollection during OI, resulting in decreases in FOK accuracy across trials
+:::
+:::: 
 
 ::: {.notes}
 These are optional notes.

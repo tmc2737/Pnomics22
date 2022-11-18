@@ -1,2 +1,39 @@
 # CONCLUSIONS
 
+## Conclusions
+
+Evidence for a retrieval-suppression account of OI is mixed.
+  + On the one hand, cued recall decreases while "No Memory" judgments increase during OI, consistent with this account.
+  + On the other, FOKs change only in magnitude and not accuracy during OI, consistent with a semantic competition Account.
+
+Interestingly, effects of OI during cued recall carried over to recognition performance.
+  + 4AFC accuracy decreases across blocked recall trials.
+
+Feelings-of-knowing show sensitivity to the degree of interference during recall.
+  + FOKs decrease in magnitude across trials during OI, even when examining only unrecalled items.
+  + No commensurate changes in FOK accuracy.
+
+
+## Future Work
+
+Correspondence between OI during recall and subsequent 4AFC performance was unexpected.
+  + Future experiments will need to control OI during recall, but not recognition, to examine sensitivity of FOKs.
+
+## END + REFERENCES
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- Anderson, M. C., & Neely, J. H. (1996). Interference and inhibition in memory retrieval. In E. L. Bjork & R. A. Bjork (Eds.), _Memory_ (pp. 237–313). Elsevier.
+- Diaz, M., & Benjamin, A. S. (2011). The effects of proactive interference (PI) and release from PI on judgments of learning. _Memory & Cognition, 39_(2), 196–203.
+- Eakin, D. K. (2005). Illusions of knowing: Metamemory and memory under conditions of retroactive interference. _Journal of Memory and Language, 52_(4), 526–534.
+- Eakin, D. K., & Hertzog, C. (2012). Age invariance in feeling of knowing during implicit interference effects. _Journals of Gerontology Series B: Psychological Sciences and Social Sciences, 67_(5), 555–562.
+- Nelson, D. L., McKinney, V. M., Gee, N. R., & Janczura, G. A. (1998). Interpreting the influence of implicitly activated memories on recall and recognition. _Psychological Review, 105_(2), 299–324.
+- Postman, L., Stark, K., & Fraser, J. (1968). Temporal changes in interference. _Journal of Verbal Learning and Verbal Behavior, 7_(3), 672–694.
+- Wilson, J. H., Kellen, D., & Criss, A. H. (2020). Mechanisms of output interference in cued recall. _Memory & Cognition, 48_(1), 51–68.
+:::
+
+::: {.column width="50%"}
+- 
+:::
+:::: 

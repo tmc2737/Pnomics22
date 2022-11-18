@@ -26,6 +26,10 @@ fig_path <- "../img/"
 ggsave(filename = paste0(fig_path,"recog_cond.png"), plot = recog.plot.1, 
        height = 4, width = 3.5, units = "in", dpi = 600)
 
+# 4AFC ACC MEANS ACROSS TRIALS
+ggsave(filename = paste0(fig_path,"recog_trial.png"), plot = recog.plot.2,
+       height = 4, width = 4, units = "in", dpi = 600)
+
 # RECALL MEANS - BY CONDITION
 ggsave(filename = paste0(fig_path,"recall_cond.png"), plot = recall.plot.1, 
        height = 4, width = 3.5, units = "in", dpi = 600)

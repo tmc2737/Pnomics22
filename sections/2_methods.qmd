@@ -54,7 +54,7 @@ These are optional notes.
 ::: {.column width="30%"}
 
 * **Study**
-  + 40 cue-target word pairs X 2.
+  + 40 cue-target word pairs x 2.
   + Presented in random order.
 * **Cued Recall**
   + Cued recall attempt + R/K/N + FOK (0-100)
@@ -69,7 +69,7 @@ These are optional notes.
 ::: {.column width="70%"}
 ![](./img/procedure.png){fig-align="center"}
 :::
-:::: 
+::::
 
 ::: {.notes}
 - We presented the cue-target pairs twice (in 2 blocks) to bring recall accuracy off of floor.

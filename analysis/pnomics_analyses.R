@@ -83,6 +83,52 @@ recog.plot.1 <-
     guides(fill = "none") + 
   scale_y_continuous(expand = c(0, 0), limits = c(0, 1)) 
 
+# MEAN BY TRIAL
+recog.means.3 <- data_summary(oi_dat, varname = "Recog_ACC", 
+                               groupnames = c("Participant","Condition","CycleTrial"))
+recog.means.3$Recog_Cent <- 0
+for (p in unique(oi_dat$Participant)){
+  recog.means.3$Recog_Cent[recog.means.3$Participant == p] <- 
+    scale(recog.means.3$Recog_ACC[recog.means.3$Participant == p], 
+          center = T, scale = F)
+}
+recog.means.4 <- data_summary(recog.means.3, varname = "Recog_ACC", 
+                               groupnames = c("Condition","CycleTrial"))
+
+## Plot the means
+recog.plot.2 <- 
+  ggplot(recog.means.4, aes(x = CycleTrial, y = Recog_ACC, color = Condition)) +
+  geom_point(alpha = 0.4) +
+  geom_errorbar(aes(ymin = Recog_ACC - se, ymax = Recog_ACC + se), alpha = 0.4) +
+  geom_smooth(method = "lm") +
+  xlab("Trial (Within Recall Cycle)") +
+  ylab("% Recognized") +
+  ylim(0.5,0.8) +
+  theme(plot.title = element_text(hjust=0.5), 
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.line.x = element_line(), 
+        axis.line.y = element_line(), 
+        legend.position = c(.8,.85), 
+        panel.background = element_rect(fill='white', color = "black"),
+        strip.text.x = element_text(size = 11, face = "bold")) +
+  scale_color_manual(values=gt_palette) +
+  scale_x_continuous(breaks = seq(1,10))
+
+# MEANS BY TRIAL - LOGIT MLM - RANDOM INTERCEPTS
+
+## Intercept model
+recog.glmer.0 <- glmer(Recog_ACC ~ 1 + (1|Participant), 
+                        family = binomial(link="logit"), data = oi_dat)
+
+## Model with condition + trial across blocks
+recog.glmer.1 <- glmer(Recog_ACC ~ Condition*CycleTrial + (1|Participant),
+                        family = binomial(link="logit"), data = oi_dat)
+
+## Model with condition + trial within blocks
+recog.glmer.2 <- glmer(Recog_ACC ~ Condition*Cycle*CycleTrial + (1|Participant),
+                        family = binomial(link="logit"), data = oi_dat)
+
 ################################################################################
 ## CUED RECALL ACC
 ################################################################################

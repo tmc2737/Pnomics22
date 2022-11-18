@@ -33,10 +33,16 @@ Recall:
 - _t_(73.79) = 0.34, _p_ = 0.73, _d_ = 0.09.
 :::
 
-## Output Interference
+## Recall Across Trials
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](./img/recall_lin_loess.png)
-
+:::
+::: {.column width="50%"}
+Cued recall accuracy decreases across trials (within blocks), but only for those in the **Related Cues** condition.
+:::
+::::
 
 ::: {.notes}
 Output of random-intercepts MLM:
@@ -47,10 +53,36 @@ Output of random-intercepts MLM:
 - Condition (Unrelated) x Trial: _b_ = 0.04, _SE_ = 0.03, _z_ = 1.32, _p_ = 0.19
 :::
 
+## 4AFC Across Recall Trials
+
+:::: {.columns}
+::: {.column width="50%"}
+![](./img/recog_trial.png)
+:::
+::: {.column width="50%"}
+Interestingly, recognition performance shows similar decreases in the Related Cues condition when 4AFC accuracy is back-sorted to align with recall trials.
+:::
+::::
+
+::: {.notes}
+Output of random-intercepts MLM:
+
+- Intercept: _b_ = 1.12, _SE_ = 0.19, _z_ = 5.99, _p_ < 0.05
+- Condition (Unrelated): _b_ = -0.35, _SE_ = 0.29, _z_ = -1.21, _p_ = 0.23
+- Trial (within cycle): _b_ = -0.04, _SE_ = 0.02, _z_ = -2.37, _p_ = 0.02
+- Condition (Unrelated) x Trial: _b_ = 0.04, _SE_ = 0.03, _z_ = 1.52, _p_ = 0.13
+:::
+
 ## Mean FOKs
 
+:::: {.columns}
+::: {.column width="50%"}
+No differences in FOK judgment magnitude between conditions.
+:::
+::: {.column width="50%"}
 ![](./img/fok_means_1.png)
-
+:::
+::::
 
 ::: {.notes}
 All items:
@@ -68,8 +100,14 @@ Unrecalled items:
 
 ## Mean FOKs by Recall Outcome
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](./img/fok_means_2.png)
-
+:::
+::: {.column width="50%"}
+No differences in FOK judgment magnitude between conditions.
+:::
+::::
 
 ::: {.notes}
 Mixed-effects ANOVA:
@@ -86,8 +124,14 @@ Means:
 
 ## Mean FOKs Across Trials
 
+:::: {.columns}
+::: {.column width="50%"}
+FOKs decrease across trials (within blocks), but only for participants in the **Related Cues** condition.
+:::
+::: {.column width="50%"}
 ![](./img/fok_trial_3.png)
-
+:::
+::::
 
 ::: {.notes}
 Random-intercepts MLM:
@@ -111,7 +155,14 @@ Simple slopes from 3-way interaction:
 
 ## Mean FOK x 4AFC Gammas
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](./img/fok_gamma_1.png)
+:::
+::: {.column width="50%"}
+FOKs share a weak relationship with recognition outcomes in both conditions.
+:::
+::::
 
 ::: {.notes}
 All items:
@@ -129,7 +180,14 @@ Unrecalled items:
 
 ## Mean RCJ x 4AFC Gammas
 
+:::: {.columns}
+::: {.column width="50%"}
+RCJs are moderately predictive of performance during 4AFC.
+:::
+::: {.column width="50%"}
 ![](./img/cj_gamma_1.png)
+:::
+::::
 
 ::: {.notes}
 All items:
@@ -147,7 +205,14 @@ Unrecalled items:
 
 ## Mean FOK x RCJ Gammas
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](./img/fok_cj_gamma.png)
+:::
+::: {.column width="50%"}
+Judgments made about recognition after a recall attempt share little relationship with confidence judgments given after recognition, particularly for items that were not recalled.
+:::
+::::
 
 ::: {.notes}
 All items:
@@ -163,25 +228,16 @@ Unrecalled items:
 - _t_() = , _p_ = , _d_ = 
 :::
 
-## Within-bin FOK x 4AFC Gammas
-
-![](./img/part_gamma_1.png)
-
-::: {.notes}
-These are optional notes.
-:::
-
-## Part-set FOK x 4AFC Gammas
-
-![](./img/part_gamma_2.png)
-
-::: {.notes}
-These are optional notes.
-:::
-
 ## R/K/N Rates by Condition
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](./img/rkn_1.png)
+:::
+::: {.column width="50%"}
+Participants in both conditions gave similar numbers of R/K/N judgments, but with different effects (next slide). 
+:::
+::::
 
 ::: {.notes}
 ME ANOVA w/ DF correction using Huyhn-Feldt
@@ -193,7 +249,16 @@ ME ANOVA w/ DF correction using Huyhn-Feldt
 
 ## R/K/N Rates Across Trials
 
+:::: {.columns}
+::: {.column width="50%"}
+During OI, self-reported recollection and familiarity decrease while states of not know increase.
+
+In the control condition, "Remember" rates increase, "No Memory" rates decrease, and "Know" rates do not change.
+:::
+::: {.column width="50%"}
 ![](./img/rkn_2.png)
+:::
+::::
 
 ::: {.notes}
 Multinomial logistic regression output. The coefficients are log-odds against the reference group (Related Cues, "Remember").

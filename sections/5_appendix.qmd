@@ -1,2 +1,18 @@
 # APPENDIX
 
+## Within-bin FOK x 4AFC Gammas
+
+![](./img/part_gamma_1.png)
+
+::: {.notes}
+These are optional notes.
+:::
+
+## Part-set FOK x 4AFC Gammas
+
+![](./img/part_gamma_2.png)
+
+::: {.notes}
+These are optional notes.
+:::
+
