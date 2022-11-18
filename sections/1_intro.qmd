@@ -2,6 +2,17 @@
 
 ## Memory Interference
 
+- Long-term memory retrieval is often affected by competing information
+  + Commonly called **memory interference**
+  + _citations here_
+
+- Most interference effects show increases in errors in which people recall the wrong item 
+  + i.e., errors of **commission**
+  + e.g., proactive interference (_citation_), implicit interference (_citation_) 
+
+- The implication is that memory interference states stem from similar operations; however, some interference states are different than others
+  + **Output interference (OI)**
+
 ::: {.notes}
 These are optional notes.
 :::
@@ -10,17 +21,19 @@ These are optional notes.
 
 ![](./img/criss_figs.png)
 
+Errors of **omission** increase while errors of **commission** stay the same.
+
+::: {.notes}
+These are optional notes.
+:::
+
+## Mechanisms of OI
+
 ::: {.notes}
 These are optional notes.
 :::
 
 ## Memory Awareness
-
-::: {.notes}
-These are optional notes.
-:::
-
-## Feelings-of-knowing
 
 ::: {.notes}
 These are optional notes.
