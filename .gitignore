@@ -4,6 +4,9 @@
 
 *.csv
 
+# Ignore presentation script
+*.docx
+
 # Ignore old analysis files
 
 /analysis/old

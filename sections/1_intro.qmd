@@ -9,8 +9,7 @@
   + i.e., errors of **commission**.
   + e.g., proactive interference (Postman et al., 1968), implicit interference (Nelson et al., 1998). 
 
-- The implication is that memory interference states stem from similar operations; however, some interference states are different than others.
-  + **Output interference (OI)**.
+- One implication is that memory interference states stem from similar operations; however, some interference states are different than others.
 
 ::: {.notes}
 These are optional notes.
@@ -18,9 +17,18 @@ These are optional notes.
 
 ## Output Interference
 
+:::: {.columns}
+
+::: {.column width="50%"}
 ![](./img/criss_figs.png)
+:::
+
+::: {.column width="50%"}
+**Output interference (OI)** is a gradual decline in memory accuracy as a function of an item’s position in a testing sequence.
 
 Errors of **omission** increase while errors of **commission** stay the same (Wilson et al., 2020).
+:::
+:::: 
 
 ::: {.notes}
 These are optional notes.
